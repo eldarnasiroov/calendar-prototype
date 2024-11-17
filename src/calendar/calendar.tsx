@@ -1,4 +1,5 @@
 import "./calendar.scss";
+import { Body } from "./partials/body";
 import { Header } from "./partials/header";
 
 export const Calendar = () => {
@@ -7,12 +8,16 @@ export const Calendar = () => {
       className="calendar-wrapper"
       style={{
         width: "100%",
-        // margin: "5px",
         padding: "5px",
         background: "white",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+        // alignItems: "center",
       }}
     >
       <Header />
+      <Body />
     </div>
   );
 };
