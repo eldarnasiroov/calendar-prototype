@@ -46,7 +46,7 @@ export const Dropdown: React.FC<Props> = ({ title, value, children }) => {
               boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
               borderRadius: "4px",
               zIndex: 10,
-              width: "360px",
+              width: "350px",
             }}
             onClick={(e) => {
               e.stopPropagation();
