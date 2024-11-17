@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { Tree } from "../../../tree";
 import { initialBrigadeList } from "../../common/data";
+import "./dropdown.scss";
 
 interface Props {
   title: string;
@@ -36,6 +37,7 @@ export const Dropdown: React.FC<Props> = ({ title, value, children }) => {
         <FontAwesomeIcon icon={faChevronDown} color="orange" />
         {isOpen && (
           <div
+            className="calendar-dropdown"
             style={{
               position: "absolute",
               top: "100%",
@@ -44,20 +46,16 @@ export const Dropdown: React.FC<Props> = ({ title, value, children }) => {
               boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
               borderRadius: "4px",
               zIndex: 10,
-              // minWidth: "320px",
-              width: "320px",
+              width: "360px",
             }}
             onClick={(e) => {
               e.stopPropagation();
             }}
           >
             <div
+              className="calendar-dropdown__content"
               style={{
-                padding: "10px",
                 cursor: "pointer",
-
-                backgroundColor: "#fff",
-                color: "#333",
               }}
             >
               {children}
