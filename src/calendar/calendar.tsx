@@ -1,5 +1,5 @@
 import "./calendar.scss";
-import { Dropdown } from "./blocks/dropdown";
+import { Header } from "./partials/header";
 
 export const Calendar = () => {
   return (
@@ -12,12 +12,7 @@ export const Calendar = () => {
         background: "white",
       }}
     >
-      <div className="calendar-header">
-        <Dropdown title="Бригада" value="БР/СТО Апельсин" />
-        <Dropdown title="Период" value="День" />
-        <Dropdown title="Должность" value="Все" />
-        <Dropdown title="Вид" value="По сотруд" />
-      </div>
+      <Header />
     </div>
   );
 };
