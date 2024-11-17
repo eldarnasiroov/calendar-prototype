@@ -98,7 +98,7 @@ const TreeNode: React.FC<ITreeNodeProps> = ({ node, depth, scroll, open }) => {
 
 // Основной компонент Tree
 export const Tree: React.FC<ITreeProps> = ({ nodes }) => {
-    const ref = useRef(null);
+    const ref = useRef<any>(null);
 
     const handleScroll = () => {
         if (!ref.current) return;

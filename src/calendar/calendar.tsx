@@ -1,7 +1,4 @@
-import { Tree } from "../tree";
 import "./calendar.scss";
-import { initialBrigadeList } from "./common/data";
-import { Test } from "./partials/blocks/test";
 import { Body } from "./partials/body";
 import { Header } from "./partials/header";
 
@@ -19,9 +16,7 @@ export const Calendar = () => {
       }}
     >
       <Header />
-      {/* <Test /> */}
       <Body />
-      <Tree nodes={initialBrigadeList} />
     </div>
   );
 };
