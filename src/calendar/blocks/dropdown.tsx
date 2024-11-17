@@ -24,7 +24,7 @@ export const Dropdown: React.FC<Props> = ({ title, value }) => {
         <div>{title}</div>
         <div>{value}</div>
       </div>
-      <FontAwesomeIcon icon={faChevronDown} />
+      <FontAwesomeIcon icon={faChevronDown} color="orange" />
     </div>
   );
 };

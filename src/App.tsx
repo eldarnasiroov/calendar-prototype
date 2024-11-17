@@ -8,10 +8,19 @@ function App() {
         width: "100%",
         display: "flex",
         justifyContent: "center",
-        background: "gray",
+        background: "grey",
       }}
     >
-      <Calendar />
+      <div
+        style={{
+          width: "100%",
+          maxWidth: "600px",
+          background: "red",
+          padding: "5px",
+        }}
+      >
+        <Calendar />
+      </div>
     </div>
   );
 }
