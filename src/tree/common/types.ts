@@ -9,7 +9,7 @@ export interface ITreeProps {
   size?: "small" | "medium";
   selectable?: boolean;
   selectedNodes?: any[];
-  onSelect?: (nodeId: number, nodeDepth: number) => void;
+  onSelect?: (node: ITreeNode, nodeDepth: number) => void;
 }
 
 export interface ITreeNodeProps {
@@ -20,5 +20,5 @@ export interface ITreeNodeProps {
   size?: "small" | "medium";
   selectable?: boolean;
   selectedNodes?: any[];
-  onSelect?: (nodeId: number, nodeDepth: number) => void;
+  onSelect?: (node: ITreeNode, nodeDepth: number) => void;
 }

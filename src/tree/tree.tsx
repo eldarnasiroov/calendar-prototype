@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { some } from "lodash";
+import { some, forEach } from "lodash";
 
 import {
   faCheck,
@@ -10,13 +10,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { HEIGHT, SMALL_HEIGHT } from "./common/constants";
 import { Folder } from "./common/folder";
-import { ITreeNodeProps, ITreeProps } from "./common/types";
+import { ITreeNode, ITreeNodeProps, ITreeProps } from "./common/types";
 
 import "./tree.scss";
 import { Button } from "antd";
 
 interface SelectedNode {
-  id: number;
+  node: ITreeNode;
   depth: number;
 }
 
@@ -35,7 +35,7 @@ const TreeNode: React.FC<ITreeNodeProps> = ({
 
   const hasChildren = node.children && node.children.length > 0;
   const isParentNode = depth === 1;
-  const isNodeSelected = some(selectedNodes, { id: node.id, depth: depth });
+  const isNodeSelected = some(selectedNodes, { node, depth });
 
   const toggleOpen = () => {
     setIsOpen((prev) => !prev);
@@ -44,6 +44,7 @@ const TreeNode: React.FC<ITreeNodeProps> = ({
 
   return (
     <div
+      key={node.id}
       className={`tree-node ${isParentNode && "tree-node__parent"} ${
         (depth !== 1 && !isOpen) || (isParentNode && !isOpen)
           ? "overflow_hidden"
@@ -132,7 +133,7 @@ const TreeNode: React.FC<ITreeNodeProps> = ({
             icon={<FontAwesomeIcon icon={faCheck} />}
             onClick={(e) => {
               e.stopPropagation();
-              onSelect(node.id, depth);
+              onSelect(node, depth);
             }}
             type={isNodeSelected ? "primary" : "default"}
           />
@@ -183,15 +184,38 @@ export const Tree: React.FC<ITreeProps> = ({
 }) => {
   const ref = useRef<any>(null);
   const [selected, setSelected] = useState<SelectedNode[]>([]);
-  console.log("🚀 ~ selected:", selected);
 
-  const handleSelect = (nodeId: number, nodeDepth: number) => {
-    const exists = some(selected, { id: nodeId, depth: nodeDepth });
-    if (exists) {
-      setSelected((prev) => prev.filter((item) => item.id !== nodeId));
-    } else {
-      setSelected((prev) => [...prev, { id: nodeId, depth: nodeDepth }]);
+  const logFirstChildren = (node: any, depth, exists) => {
+    if (node.children && node.children.length > 0) {
+      if (exists) {
+        setSelected((prev) => prev.filter((item) => item.node.id !== node.id));
+        forEach(node.children, (item) =>
+          logFirstChildren(item, depth + 1, exists)
+        );
+        return;
+      }
+      const nodeExists = some(selected, { node, depth });
+      !nodeExists && setSelected((prev) => [...prev, { node, depth }]);
+      forEach(node.children, (item) =>
+        logFirstChildren(item, depth + 1, exists)
+      );
+      return;
     }
+
+    if (exists) {
+      setSelected((prev) => prev.filter((item) => item.node.id !== node.id));
+      forEach(node.children, (item) =>
+        logFirstChildren(item, depth + 1, exists)
+      );
+      return;
+    }
+    const nodeExists = some(selected, { node, depth });
+    !nodeExists && setSelected((prev) => [...prev, { node, depth }]);
+  };
+
+  const handleSelect = (node: ITreeNode, nodeDepth: number) => {
+    const exists = some(selected, { node, depth: nodeDepth });
+    logFirstChildren(node, nodeDepth, exists);
   };
 
   const handleScroll = () => {
