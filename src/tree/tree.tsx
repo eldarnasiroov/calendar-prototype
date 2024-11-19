@@ -68,7 +68,7 @@ const TreeNode: React.FC<ITreeNodeProps> = ({
             <p
               className="tree-node__type"
               style={{
-                right: size === "small" ? "2px" : null,
+                right: size === "small" ? "0" : null,
                 top: size === "small" ? "3px" : null,
                 fontSize: size === "small" ? "8px" : "",
               }}
