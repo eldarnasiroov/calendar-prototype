@@ -8,7 +8,7 @@ export const Header = () => {
       <Dropdown
         title="Бригада"
         value="БР/СТО Апельсин"
-        children={<Tree nodes={initialBrigadeList} size="small" />}
+        children={<Tree nodes={initialBrigadeList} size="small" selectable />}
       />
       <Dropdown title="Должность" value="Все" />
       <Dropdown title="Вид" value="По сотруд" />

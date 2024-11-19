@@ -35,6 +35,7 @@ export const Dropdown: React.FC<Props> = ({ title, value, children }) => {
             maxHeight: isOpen ? "500px" : 0,
             width: isOpen ? "350px" : 0,
             transition: "all 0.3s ease",
+            overflow: isOpen ? "scroll" : "hidden",
           }}
         >
           <div

@@ -1,6 +1,8 @@
 import React, { useRef, useState } from "react";
+import { some } from "lodash";
 
 import {
+  faCheck,
   faChevronDown,
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
@@ -11,6 +13,12 @@ import { Folder } from "./common/folder";
 import { ITreeNodeProps, ITreeProps } from "./common/types";
 
 import "./tree.scss";
+import { Button } from "antd";
+
+interface SelectedNode {
+  id: number;
+  depth: number;
+}
 
 // Компонент для одного узла дерева
 const TreeNode: React.FC<ITreeNodeProps> = ({
@@ -19,11 +27,15 @@ const TreeNode: React.FC<ITreeNodeProps> = ({
   scroll,
   open,
   size,
+  selectable = false,
+  selectedNodes = [],
+  onSelect = () => {},
 }) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const hasChildren = node.children && node.children.length > 0;
   const isParentNode = depth === 1;
+  const isNodeSelected = some(selectedNodes, { id: node.id, depth: depth });
 
   const toggleOpen = () => {
     setIsOpen((prev) => !prev);
@@ -54,12 +66,18 @@ const TreeNode: React.FC<ITreeNodeProps> = ({
         <div className="tree-node__info">
           <div
             className="tree-node__icon-wrapper"
-            style={size === "small" ? { width: "60px", height: SMALL_HEIGHT + "px" } : null}
+            style={
+              size === "small"
+                ? { width: "60px", height: SMALL_HEIGHT + "px" }
+                : null
+            }
           >
             <div
               className="tree-node__icon"
               style={
-                size === "small" ? { width: "60px", height: SMALL_HEIGHT + "px" } : null
+                size === "small"
+                  ? { width: "60px", height: SMALL_HEIGHT + "px" }
+                  : null
               }
             >
               <Folder />
@@ -100,6 +118,25 @@ const TreeNode: React.FC<ITreeNodeProps> = ({
             color="#9538EE"
           />
         )}
+
+        {selectable && (
+          <Button
+            shape="circle"
+            style={{
+              width: size === "small" ? "30px" : "",
+              height: size === "small" ? "30px" : "",
+              minWidth: "30px",
+              boxSizing: "border-box",
+              marginLeft: "10px",
+            }}
+            icon={<FontAwesomeIcon icon={faCheck} />}
+            onClick={(e) => {
+              e.stopPropagation();
+              onSelect(node.id, depth);
+            }}
+            type={isNodeSelected ? "primary" : "default"}
+          />
+        )}
       </div>
 
       {hasChildren && (
@@ -125,6 +162,9 @@ const TreeNode: React.FC<ITreeNodeProps> = ({
               scroll={scroll}
               open={isOpen}
               size={size}
+              selectable
+              onSelect={onSelect}
+              selectedNodes={selectedNodes}
             />
           ))}
         </div>
@@ -134,8 +174,25 @@ const TreeNode: React.FC<ITreeNodeProps> = ({
 };
 
 // Основной компонент Tree
-export const Tree: React.FC<ITreeProps> = ({ nodes, size = "medium" }) => {
+export const Tree: React.FC<ITreeProps> = ({
+  nodes,
+  size = "medium",
+  selectable,
+  onSelect,
+  selectedNodes,
+}) => {
   const ref = useRef<any>(null);
+  const [selected, setSelected] = useState<SelectedNode[]>([]);
+  console.log("🚀 ~ selected:", selected);
+
+  const handleSelect = (nodeId: number, nodeDepth: number) => {
+    const exists = some(selected, { id: nodeId, depth: nodeDepth });
+    if (exists) {
+      setSelected((prev) => prev.filter((item) => item.id !== nodeId));
+    } else {
+      setSelected((prev) => [...prev, { id: nodeId, depth: nodeDepth }]);
+    }
+  };
 
   const handleScroll = () => {
     if (!ref.current) return;
@@ -159,6 +216,9 @@ export const Tree: React.FC<ITreeProps> = ({ nodes, size = "medium" }) => {
             scroll={handleScroll}
             open={false}
             size={size}
+            selectable={selectable}
+            onSelect={handleSelect}
+            selectedNodes={selected}
           />
         ))}
       </div>
