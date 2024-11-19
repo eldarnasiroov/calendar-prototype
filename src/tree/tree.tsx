@@ -48,17 +48,18 @@ const TreeNode: React.FC<ITreeNodeProps> = ({
               ? (size === "small" ? SMALL_HEIGHT : HEIGHT) + "px"
               : "0px",
           padding: size === "small" ? "5px" : "10px",
+          fontSize: size === "small" ? "8px" : "",
         }}
       >
         <div className="tree-node__info">
           <div
             className="tree-node__icon-wrapper"
-            style={size === "small" ? { width: "70px", height: "60px" } : null}
+            style={size === "small" ? { width: "60px", height: SMALL_HEIGHT + "px" } : null}
           >
             <div
               className="tree-node__icon"
               style={
-                size === "small" ? { width: "70px", height: "60px" } : null
+                size === "small" ? { width: "60px", height: SMALL_HEIGHT + "px" } : null
               }
             >
               <Folder />
@@ -66,14 +67,18 @@ const TreeNode: React.FC<ITreeNodeProps> = ({
             <p className="tree-node__count">57</p>
             <p
               className="tree-node__type"
-              style={{ right: size === "small" ? "-7px" : null }}
+              style={{
+                right: size === "small" ? "2px" : null,
+                top: size === "small" ? "3px" : null,
+                fontSize: size === "small" ? "8px" : "",
+              }}
             >
               Бригада
             </p>
             <img
               className="tree-node__image"
-              width={size === "small" ? 45 : 65}
-              height={size === "small" ? 45 : 65}
+              width={size === "small" ? 35 : 65}
+              height={size === "small" ? 35 : 65}
               src={"no_image_worker.svg"}
               alt=""
               style={{ top: "12px" }}
