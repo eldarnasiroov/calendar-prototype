@@ -1,10 +1,34 @@
-.calendar-dropdown {
-  .calendar-dropdown__content {
-    .tree-wrapper {
-      .tree-wrapper__nodes {
-        .tree-node {
-          .tree-node__wrapper {
-            width: 220px !important;
+.calendar-dropdown__wrapper {
+  background: #ededed;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px;
+  border-radius: 20px;
+  gap: 5px;
+  font-size: 12px;
+  cursor: pointer;
+  position: relative;
+
+  .calendar-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    z-index: 10;
+    width: 350px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+
+    .calendar-dropdown__content {
+      .tree-wrapper {
+        .tree-wrapper__nodes {
+          .tree-node {
+            .tree-node__wrapper {
+              width: 220px !important;
+            }
           }
         }
       }

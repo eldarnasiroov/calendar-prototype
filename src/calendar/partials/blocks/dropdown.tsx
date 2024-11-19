@@ -1,8 +1,7 @@
-import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
-import { Tree } from "../../../tree";
-import { initialBrigadeList } from "../../common/data";
+
 import "./dropdown.scss";
 
 interface Props {
@@ -16,52 +15,37 @@ export const Dropdown: React.FC<Props> = ({ title, value, children }) => {
   return (
     <>
       <div
-        style={{
-          background: "#EDEDED",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          padding: "5px",
-          borderRadius: "20px",
-          gap: "5px",
-          fontSize: "12px",
-          cursor: "pointer",
-          position: "relative",
-        }}
+        className="calendar-dropdown__wrapper"
         onClick={() => setIsOpen(!isOpen)}
       >
         <div style={{ padding: "5px" }}>
           <div>{title}</div>
           <div>{value}</div>
         </div>
-        <FontAwesomeIcon icon={faChevronDown} color="orange" />
-        {isOpen && (
+        <FontAwesomeIcon
+          icon={isOpen ? faChevronUp : faChevronDown}
+          color="orange"
+        />
+        <div
+          className="calendar-dropdown"
+          onClick={(e) => {
+            e.stopPropagation();
+          }}
+          style={{
+            maxHeight: isOpen ? "500px" : 0,
+            width: isOpen ? "350px" : 0,
+            transition: "all 0.3s ease",
+          }}
+        >
           <div
-            className="calendar-dropdown"
+            className="calendar-dropdown__content"
             style={{
-              position: "absolute",
-              top: "100%",
-              left: 0,
-              backgroundColor: "#fff",
-              boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-              borderRadius: "4px",
-              zIndex: 10,
-              width: "350px",
-            }}
-            onClick={(e) => {
-              e.stopPropagation();
+              cursor: "pointer",
             }}
           >
-            <div
-              className="calendar-dropdown__content"
-              style={{
-                cursor: "pointer",
-              }}
-            >
-              {children}
-            </div>
+            {children}
           </div>
-        )}
+        </div>
       </div>
     </>
   );
