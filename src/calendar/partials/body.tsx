@@ -1,6 +1,8 @@
 import { Content } from "./blocks/content";
+import { map } from "lodash";
 
 export const Body = () => {
+  const data = [1, 2, 3, 4, 5, 6, 7];
   return (
     <div
       style={{
@@ -13,12 +15,9 @@ export const Body = () => {
         gap: "5px",
       }}
     >
-      <Content />
-      <Content />
-      <Content />
-      <Content />
-      <Content />
-      <Content />
+      {map(data, (item, index) => (
+        <Content key={item} index={index} />
+      ))}
     </div>
   );
 };
