@@ -19,7 +19,7 @@
     border-radius: 4px;
     z-index: 10;
     width: 350px;
-    transition: all 0.3s ease;
+    // transition: max-height 0.3s ease, width 0.3s ease;
 
     .calendar-dropdown__content {
       .tree-wrapper {
