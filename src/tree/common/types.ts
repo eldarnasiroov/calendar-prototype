@@ -31,6 +31,7 @@ export interface ITreeNode {
     surname: string;
     patronymic: string;
     position: string;
+    image?: string;
   };
   worker?: {
     id: number;
@@ -38,6 +39,7 @@ export interface ITreeNode {
     surname: string;
     patronymic: string;
     position: string;
+    image?: string;
   };
   children?: ITreeNode[];
 }

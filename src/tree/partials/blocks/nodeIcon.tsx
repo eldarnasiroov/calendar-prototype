@@ -54,7 +54,7 @@ export const NodeIcon: React.FC<Props> = ({ node, size = "medium" }) => {
             className="tree-node__image"
             width={size === "small" ? 35 : 65}
             height={size === "small" ? 35 : 65}
-            src={"no_image_worker.svg"}
+            src={node?.brigadier?.image}
             alt=""
             style={{ top: "12px" }}
           />
@@ -65,7 +65,7 @@ export const NodeIcon: React.FC<Props> = ({ node, size = "medium" }) => {
         <img
           width={size === "small" ? 35 : 65}
           height={size === "small" ? 35 : 65}
-          src={"no_image_customer.svg"}
+          src={node?.worker?.image}
           alt=""
           style={{
             borderRadius: "50%",
