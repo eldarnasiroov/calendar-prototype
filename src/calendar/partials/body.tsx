@@ -1,8 +1,18 @@
+import { ITreeNode } from "../../tree/common/types";
 import { Content } from "./blocks/content";
 import { map } from "lodash";
 
-export const Body = () => {
-  const data = [1, 2, 3, 4, 5, 6, 7];
+interface SelectedNode {
+  node: ITreeNode;
+  depth: number;
+}
+
+interface Props {
+  data: SelectedNode[];
+}
+
+export const Body: React.FC<Props> = ({ data }) => {
+  const temp = [1, 2, 3, 4, 5, 6, 7];
   return (
     <div
       style={{
@@ -10,7 +20,7 @@ export const Body = () => {
         fontSize: "12px",
         width: "100%",
         display: "flex",
-        justifyContent: "space-between",
+        // justifyContent: "",
         alignItems: "center",
         gap: "5px",
       }}

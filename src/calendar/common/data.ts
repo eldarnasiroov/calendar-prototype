@@ -1,6 +1,6 @@
 import { ITreeNode } from "../../tree/common/types";
 
-export const test: ITreeNode[] = [
+export const mockData: ITreeNode[] = [
   {
     id: 1,
     parentId: null,

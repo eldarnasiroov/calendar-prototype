@@ -1,5 +1,4 @@
 export const Content = ({ index }) => {
-  console.log("🚀 ~ Content ~ index:", index);
   const colors = {
     0: "#1745E1",
     1: "#FD3132",
@@ -14,23 +13,29 @@ export const Content = ({ index }) => {
     <div
       style={{
         width: "100%",
+        maxWidth: "100px",
+        minWidth: '60px', 
         height: "100vh",
-        // background: "yellow",
+        background: "yellow",
         display: "flex",
         justifyContent: "center",
         alignItems: "start",
         borderRadius: "40px 40px 0 40px",
         borderRight: `4px solid ${colors[index]}`,
+        // borderTop: `4px solid ${colors[index]}`,
+        position: "relative",
       }}
     >
       <div
         style={{
           width: "100%",
-          maxWidth: "80px",
+          // maxWidth: "80px",
           aspectRatio: "1",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
+          position: "absolute",
+          right: "-4px",
         }}
       >
         <div
@@ -41,13 +46,19 @@ export const Content = ({ index }) => {
             overflow: "hidden",
             border: `4px solid ${colors[index]}`,
             borderLeft: `4px dotted ${colors[index]}`,
+            margin: 0,
             transform: "rotate(45deg)",
           }}
         >
           <img
             src="no_image_worker.svg"
             alt=""
-            style={{ width: "100%", height: "100%", objectFit: "cover", transform: "rotate(-45deg)", }}
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              transform: "rotate(-45deg)",
+            }}
           />
         </div>
       </div>

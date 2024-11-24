@@ -19,19 +19,18 @@ export const Tree: React.FC<ITreeProps> = ({
   selectedNodes,
 }) => {
   const ref = useRef<any>(null);
-  const [selected, setSelected] = useState<SelectedNode[]>([]);
 
   const logFirstChildren = (node: any, depth, exists) => {
     if (node.children && node.children.length > 0) {
       if (exists) {
-        setSelected((prev) => prev.filter((item) => item.node.id !== node.id));
+        onSelect((prev) => prev.filter((item) => item.node.id !== node.id));
         forEach(node.children, (item) =>
           logFirstChildren(item, depth + 1, exists)
         );
         return;
       }
-      const nodeExists = some(selected, { node, depth });
-      !nodeExists && setSelected((prev) => [...prev, { node, depth }]);
+      const nodeExists = some(selectedNodes, { node, depth });
+      !nodeExists && onSelect((prev) => [...prev, { node, depth }]);
       forEach(node.children, (item) =>
         logFirstChildren(item, depth + 1, exists)
       );
@@ -39,18 +38,18 @@ export const Tree: React.FC<ITreeProps> = ({
     }
 
     if (exists) {
-      setSelected((prev) => prev.filter((item) => item.node.id !== node.id));
+      onSelect((prev) => prev.filter((item) => item.node.id !== node.id));
       forEach(node.children, (item) =>
         logFirstChildren(item, depth + 1, exists)
       );
       return;
     }
-    const nodeExists = some(selected, { node, depth });
-    !nodeExists && setSelected((prev) => [...prev, { node, depth }]);
+    const nodeExists = some(selectedNodes, { node, depth });
+    !nodeExists && onSelect((prev) => [...prev, { node, depth }]);
   };
 
   const handleSelect = (node: ITreeNode, nodeDepth: number) => {
-    const exists = some(selected, { node, depth: nodeDepth });
+    const exists = some(selectedNodes, { node, depth: nodeDepth });
     logFirstChildren(node, nodeDepth, exists);
   };
 
@@ -78,7 +77,7 @@ export const Tree: React.FC<ITreeProps> = ({
             size={size}
             selectable={selectable}
             onSelect={handleSelect}
-            selectedNodes={selected}
+            selectedNodes={selectedNodes}
           />
         ))}
       </div>
