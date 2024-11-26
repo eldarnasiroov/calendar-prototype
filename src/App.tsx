@@ -8,14 +8,14 @@ function App() {
         width: "100%",
         display: "flex",
         justifyContent: "center",
-        background: "grey",
+        // background: "grey",
       }}
     >
       <div
         style={{
           width: "100%",
           maxWidth: "600px",
-          background: "red",
+          // background: "red",
           padding: "5px",
         }}
       >

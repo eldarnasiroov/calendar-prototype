@@ -13,7 +13,6 @@ interface SelectedNode {
 
 export const Calendar = () => {
   const [selectedEntities, setSelectedEntities] = useState<SelectedNode[]>([]);
-  console.log("🚀 ~ Calendar ~ selectedEntities:", selectedEntities)
 
   return (
     <div

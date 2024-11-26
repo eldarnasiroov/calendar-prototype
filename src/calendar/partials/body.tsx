@@ -23,10 +23,11 @@ export const Body: React.FC<Props> = ({ data }) => {
         // justifyContent: "",
         alignItems: "center",
         gap: "5px",
+        overflowX: "scroll",
       }}
     >
       {map(data, (item, index) => (
-        <Content key={item} index={index} />
+        <Content key={item} index={index} data={item} />
       ))}
     </div>
   );
