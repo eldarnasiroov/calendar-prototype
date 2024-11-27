@@ -1,5 +1,6 @@
+import "./content.scss";
+
 export const Content = ({ index, data }) => {
-  console.log("🚀 ~ Content ~ data:", data);
   const colors = {
     0: "#1745E1",
     1: "#FD3132",
@@ -12,84 +13,33 @@ export const Content = ({ index, data }) => {
 
   return (
     <div
+      className="calendar-content-column_wrapper"
       style={{
-        width: "100%",
-        maxWidth: "100px",
-        minWidth: "60px",
-        height: "100vh",
-        // background: "yellow",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        // gap: "10px",
-        // justifyContent: "center",
-        // justifyContent: "center",
-        // alignItems: "start",
-        borderRadius: "40px 40px 0 40px",
         borderRight: `4px solid ${colors[index]}`,
-        // borderTop: `4px solid ${colors[index]}`,
-        position: "relative",
-        // overflow: "hidden",
       }}
     >
       <div>
-        <div
-          style={{
-            width: "100%",
-            // maxWidth: "80px",
-            aspectRatio: "1",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            // position: "absolute",
-            // right: "-4px",
-            overflow: "hidden",
-          }}
-        >
+        <div className="column-avatar_wrapper">
           <div
+            className="column-avatar"
             style={{
-              height: "100%",
-              width: "100%",
-              borderRadius: "50%",
-              overflow: "hidden",
-              border: `4px solid ${colors[index]}`,
               borderLeft: `4px dotted ${colors[index]}`,
-              margin: 0,
-              transform: "rotate(45deg)",
+              border: `4px solid ${colors[index]}`,
             }}
           >
             <img
               src="no_image_worker.svg"
               alt=""
-              style={{
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-                transform: "rotate(-45deg)",
-              }}
+              className="column-avatar_image"
             />
           </div>
         </div>
       </div>
 
       {/* Контейнер для задач */}
-      <div style={{ width: "100%", display: "flex", flexDirection: "column", paddingRight: "5px" }}>
-        <div
-          style={{
-            width: "100%",
-            background: "orange",
-            // maxWidth: "100px",
-            textAlign: "center",
-            fontSize: "12px",
-            // wordBreak: "break-all",
-            whiteSpace: "nowrap",
-            textOverflow: "ellipsis",
-            overflow: "hidden",
-            // marginRight: "5px",
-          }}
-        >
-          {data.node.name}
-        </div>
+      <div className="calendar-orders_wrapper">
+        <div className="calendar-orders_title">{data.node.name}</div>
+
         <div
           style={{
             width: "100%",
@@ -98,7 +48,6 @@ export const Content = ({ index, data }) => {
             borderRadius: "10px",
             padding: "5px",
             marginTop: "10px",
-            // marginRight: "5px",
           }}
         ></div>
         <div
@@ -109,7 +58,6 @@ export const Content = ({ index, data }) => {
             borderRadius: "10px",
             padding: "5px",
             marginTop: "10px",
-            // marginRight: "5px",
           }}
         ></div>
         <div
@@ -120,7 +68,6 @@ export const Content = ({ index, data }) => {
             borderRadius: "10px",
             padding: "5px",
             marginTop: "10px",
-            // marginRight: "5px",
           }}
         ></div>
         <div
@@ -131,7 +78,6 @@ export const Content = ({ index, data }) => {
             borderRadius: "10px",
             padding: "5px",
             marginTop: "10px",
-            // marginRight: "5px",
           }}
         ></div>
       </div>
