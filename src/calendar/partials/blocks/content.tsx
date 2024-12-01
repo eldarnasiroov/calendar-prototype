@@ -1,6 +1,7 @@
+import { useState } from "react";
 import "./content.scss";
 
-export const Content = ({ index, data }) => {
+export const Content = ({ index, data, onClick = (a) => {} }) => {
   const colors = {
     0: "#1745E1",
     1: "#FD3132",
@@ -11,12 +12,18 @@ export const Content = ({ index, data }) => {
     6: "#1745E1",
   };
 
+  console.log("content data ==> ", data);
+
   return (
     <div
       className="calendar-content-column_wrapper"
       style={{
         borderRight: `4px solid ${colors[index]}`,
+        minWidth: index === 0 ? '100px' : '',
+        maxWidth: index === 0 ? '110px' : '',
+        position: index === 0 ? 'sticky' : 'inherit',
       }}
+      onClick={() => onClick(data)}
     >
       <div>
         <div className="column-avatar_wrapper">
@@ -38,7 +45,14 @@ export const Content = ({ index, data }) => {
 
       {/* Контейнер для задач */}
       <div className="calendar-orders_wrapper">
-        <div className="calendar-orders_title">{data.node.name}</div>
+        <div
+          className="calendar-orders_title"
+          style={{
+            background: data.node.type === "brigade" ? "#E66F1B" : "#FFB20A",
+          }}
+        >
+          {data.node.name}
+        </div>
 
         <div
           style={{

@@ -9,14 +9,7 @@ export const mockData: ITreeNode[] = [
     ordersQuantity: 6,
     ordersTotalSum: 50000,
     workload: 45,
-    brigadier: {
-      id: 1,
-      name: "Саша",
-      surname: "Белый",
-      patronymic: "Иванович",
-      position: "Директор",
-      image: "no_image_worker.svg",
-    },
+
     children: [
       {
         id: 2,
@@ -26,14 +19,7 @@ export const mockData: ITreeNode[] = [
         ordersQuantity: 3,
         ordersTotalSum: 30000,
         workload: 30,
-        brigadier: {
-          id: 2,
-          name: "Виктор",
-          surname: "Пчела",
-          patronymic: "Алексеевич",
-          position: "Менеджер",
-          image: "no_image_worker.svg",
-        },
+
         children: [
           {
             id: 6,
@@ -43,14 +29,23 @@ export const mockData: ITreeNode[] = [
             ordersQuantity: 3,
             ordersTotalSum: 30000,
             workload: 30,
-            brigadier: {
-              id: 2,
-              name: "Евгений",
-              surname: "Онегин",
-              patronymic: "Алексеевич",
-              position: "Менеджер",
-              image: "no_image_worker.svg",
-            },
+            children: [
+              {
+                id: 9,
+                parentId: 2,
+                name: "Бригадир",
+                type: "workplace",
+                worker: {
+                  id: 10,
+                  name: "Артур",
+                  surname: "Слепаков",
+                  patronymic: "Александрович",
+                  position: "Бригадир",
+                  image: "no_image_customer.svg",
+                  isBrigadier: true,
+                },
+              },
+            ],
           },
           {
             id: 7,
@@ -66,6 +61,21 @@ export const mockData: ITreeNode[] = [
               image: "no_image_customer.svg",
             },
           },
+          {
+            id: 17,
+            parentId: 2,
+            name: "Бригадир",
+            type: "workplace",
+            worker: {
+              id: 5,
+              name: "Николай",
+              surname: "Слепаков",
+              patronymic: "Александрович",
+              position: "Бригадир",
+              image: "no_image_customer.svg",
+              isBrigadier: true,
+            },
+          },
         ],
       },
       {
@@ -76,14 +86,23 @@ export const mockData: ITreeNode[] = [
         ordersQuantity: 6,
         ordersTotalSum: 300500,
         workload: 70,
-        brigadier: {
-          id: 3,
-          name: "Космос",
-          surname: "Холмогоров",
-          patronymic: "Евгеньевич",
-          position: "Старший механик",
-          image: "no_image_worker.svg",
-        },
+        children: [
+          {
+            id: 15,
+            parentId: 3,
+            name: "Бригадир",
+            type: "workplace",
+            worker: {
+              id: 16,
+              name: "Вячеслав",
+              surname: "Слепаков",
+              patronymic: "Александрович",
+              position: "Бригадир",
+              image: "no_image_customer.svg",
+              isBrigadier: true,
+            },
+          },
+        ],
       },
       {
         id: 4,
@@ -97,6 +116,21 @@ export const mockData: ITreeNode[] = [
           patronymic: "Александрович",
           position: "Механик",
           image: "no_image_customer.svg",
+        },
+      },
+      {
+        id: 8,
+        parentId: 1,
+        name: "Бригадир",
+        type: "workplace",
+        worker: {
+          id: 5,
+          name: "Михаил",
+          surname: "Кузнецов",
+          patronymic: "Александрович",
+          position: "Бригадир",
+          image: "no_image_customer.svg",
+          isBrigadier: true,
         },
       },
     ],

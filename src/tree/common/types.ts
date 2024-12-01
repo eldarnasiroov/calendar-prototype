@@ -21,6 +21,7 @@ export interface ITreeNode {
     patronymic: string;
     position: string;
     image?: string;
+    isBrigadier?: boolean;
   };
   children?: ITreeNode[];
 }

@@ -1,6 +1,7 @@
+import { useState } from "react";
 import { ITreeNode } from "../../tree/common/types";
 import { Content } from "./blocks/content";
-import { map } from "lodash";
+import { map, isEmpty } from "lodash";
 
 interface SelectedNode {
   node: ITreeNode;
@@ -12,7 +13,13 @@ interface Props {
 }
 
 export const Body: React.FC<Props> = ({ data }) => {
-  const temp = [1, 2, 3, 4, 5, 6, 7];
+  const [temp, setTemp] = useState(data);
+
+  const handleClick = (item: ITreeNode) => {
+  console.log("🚀 ~ handleClick ~ item:", item)
+
+  };
+  // const
   return (
     <div
       style={{
@@ -20,14 +27,14 @@ export const Body: React.FC<Props> = ({ data }) => {
         fontSize: "12px",
         width: "100%",
         display: "flex",
-        // justifyContent: "",
         alignItems: "center",
         gap: "5px",
         overflowX: "scroll",
+        position: "relative", 
       }}
     >
       {map(data, (item, index) => (
-        <Content key={item} index={index} data={item} />
+        <Content key={item} index={index} data={item} onClick={handleClick} />
       ))}
     </div>
   );
