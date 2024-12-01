@@ -26,7 +26,13 @@ export const TreeNode: React.FC<ITreeNodeProps> = ({
 
   const hasChildren = node.children && node.children.length > 0;
   const isParentNode = depth === 1;
-  const isNodeSelected = some(selectedNodes, { node, depth });
+  const isNodeSelected = some(selectedNodes, {
+    node: {
+      ...node,
+      children: [],
+    },
+    depth,
+  });
 
   const toggleOpen = () => {
     setIsOpen((prev) => !prev);

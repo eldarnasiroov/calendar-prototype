@@ -12,16 +12,12 @@ export const Content = ({ index, data, onClick = (a) => {} }) => {
     6: "#1745E1",
   };
 
-  console.log("content data ==> ", data);
 
   return (
     <div
       className="calendar-content-column_wrapper"
       style={{
         borderRight: `4px solid ${colors[index]}`,
-        minWidth: index === 0 ? '100px' : '',
-        maxWidth: index === 0 ? '110px' : '',
-        position: index === 0 ? 'sticky' : 'inherit',
       }}
       onClick={() => onClick(data)}
     >
