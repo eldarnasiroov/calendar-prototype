@@ -32,7 +32,7 @@ export const mockData: ITreeNode[] = [
             children: [
               {
                 id: 9,
-                parentId: 2,
+                parentId: 6,
                 name: "Бригадир",
                 type: "workplace",
                 worker: {
