@@ -17,10 +17,9 @@ export const Content = ({ index, data, onClick = (a) => {} }) => {
       style={{
         borderRight: `4px solid ${colors[index % colors.length]}`,
       }}
-      onClick={() => onClick(data)}
     >
       <div>
-        <div className="column-avatar_wrapper">
+        <div className="column-avatar_wrapper" onClick={() => onClick(data)}>
           <div
             className="column-avatar"
             style={{
@@ -48,37 +47,38 @@ export const Content = ({ index, data, onClick = (a) => {} }) => {
         </div>
 
         {isBrigade && (
-        <div
-          style={{
-            marginTop: "5px",
-            background: "#FCCC9E",
-            width: "100%",
-            padding: "5px",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            borderRadius: "10px",
-            textAlign: "center",
-            lineHeight: "14px",
-            gap: "5px",
-          }}
-        >
-          <p style={{ margin: "0" }}>Сотрудн.</p>
-          <p style={{ margin: "0", fontWeight: "bold", color: "violet" }}>
-            {getCountOfWorkplaces(data)}
-          </p>
-          <p style={{ margin: "0" }}>Загруж-сть</p>
-          <p style={{ margin: "0", fontWeight: "bold" }}>{data.workload}%</p>
-          <p style={{ margin: "0" }}>Тек. заказы</p>
-          <p style={{ margin: "0" }}>
-            <span style={{ fontWeight: "bold", color: "violet" }}>{0}</span> на
-          </p>
-          <p style={{ margin: "0", fontWeight: "bold" }}>{0}₽</p>
-          <p style={{ margin: "0", fontWeight: "bold", color: "white" }}>
-            {0}%
-          </p>
-        </div>
-      )}
+          <div
+            style={{
+              marginTop: "5px",
+              background: "#FCCC9E",
+              width: "100%",
+              padding: "5px",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              borderRadius: "10px",
+              textAlign: "center",
+              lineHeight: "14px",
+              gap: "5px",
+            }}
+          >
+            <p style={{ margin: "0" }}>Сотрудн.</p>
+            <p style={{ margin: "0", fontWeight: "bold", color: "violet" }}>
+              {getCountOfWorkplaces(data)}
+            </p>
+            <p style={{ margin: "0" }}>Загруж-сть</p>
+            <p style={{ margin: "0", fontWeight: "bold" }}>{data.workload}%</p>
+            <p style={{ margin: "0" }}>Тек. заказы</p>
+            <p style={{ margin: "0" }}>
+              <span style={{ fontWeight: "bold", color: "violet" }}>{0}</span>{" "}
+              на
+            </p>
+            <p style={{ margin: "0", fontWeight: "bold" }}>{0}₽</p>
+            <p style={{ margin: "0", fontWeight: "bold", color: "white" }}>
+              {0}%
+            </p>
+          </div>
+        )}
       </div>
     </div>
   );
