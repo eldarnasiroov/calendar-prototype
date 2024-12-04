@@ -1,6 +1,5 @@
 import { Tree } from "../../tree";
 import { ITreeNode } from "../../tree/common/types";
-import { mockData } from "../common/data";
 import { Dropdown } from "./blocks/dropdown";
 
 interface Props {
@@ -17,7 +16,7 @@ export const Header: React.FC<Props> = ({ treeProps }) => {
       <Dropdown
         title="Бригада"
         value="БР/СТО Апельсин"
-        children={<Tree size="small" selectable {...treeProps} />}
+        children={<Tree size="small" selectable={true} {...treeProps} />}
       />
       <Dropdown title="Должность" value="Все" />
       <Dropdown title="Вид" value="По сотруд" />

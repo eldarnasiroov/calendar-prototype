@@ -11,6 +11,7 @@ import {
 import { Button } from "antd";
 import "./treeNode.scss";
 import { NodeIcon } from "./blocks/nodeIcon";
+import { getBrigadierFromNode } from "../common/helpers";
 
 export const TreeNode: React.FC<ITreeNodeProps> = ({
   node,
@@ -23,6 +24,8 @@ export const TreeNode: React.FC<ITreeNodeProps> = ({
   onSelect = () => {},
 }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  const brigadier = getBrigadierFromNode(node);
 
   const hasChildren = node.children && node.children.length > 0;
   const isParentNode = depth === 1;
@@ -68,7 +71,7 @@ export const TreeNode: React.FC<ITreeNodeProps> = ({
             <p style={{ margin: "0px", fontWeight: "bold" }}>{node.name}</p>
             <p style={{ margin: "0px" }}>
               {node.type === "brigade"
-                ? `${node?.brigadier?.position} / ${node?.brigadier?.name} ${node?.brigadier?.surname[0]}.`
+                ? `${brigadier?.worker?.position} / ${brigadier?.worker?.name} ${brigadier?.worker?.surname[0]}.`
                 : `${node?.worker?.name} ${node?.worker?.surname[0]}.`}
             </p>
           </div>
@@ -125,7 +128,7 @@ export const TreeNode: React.FC<ITreeNodeProps> = ({
               scroll={scroll}
               open={isOpen}
               size={size}
-              selectable
+              selectable={selectable}
               onSelect={onSelect}
               selectedNodes={selectedNodes}
             />

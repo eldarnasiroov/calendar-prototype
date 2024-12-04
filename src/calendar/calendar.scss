@@ -4,4 +4,15 @@
     justify-content: space-between;
     align-items: center;
   }
+
+  .calendar-body__wrapper {
+    margin-top: 10px;
+    font-size: 12px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    overflow-x: scroll;
+    position: relative;
+  }
 }

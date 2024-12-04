@@ -1,3 +1,43 @@
+interface TOrder {
+  /**
+   * ID заказа
+   */
+  id: number;
+
+  /**
+   * Общая сумма
+   */
+  total_sum: number;
+  /**
+   * Процент с работы
+   */
+  percent_of_work: number;
+  /**
+   * Статус заказы
+   */
+  order_status: string;
+  /**
+   * Дата сдачи заказа
+   */
+  finish_planned_at: Date;
+  /**
+   * Дата завершения заказа
+   */
+  finished_at: Date;
+  /**
+   * Дата начала заказа
+   */
+  start_planned_at: Date;
+  /**
+   * Дата начала заказа
+   */
+  started_at: Date;
+  /**
+   * Дата создания заказа
+   */
+  created_at: Date;
+}
+
 export interface ITreeNode {
   id: number;
   parentId: number | null;
@@ -6,14 +46,6 @@ export interface ITreeNode {
   ordersQuantity?: number;
   ordersTotalSum?: number;
   workload?: number;
-  brigadier?: {
-    id: number;
-    name: string;
-    surname: string;
-    patronymic: string;
-    position: string;
-    image?: string;
-  };
   worker?: {
     id: number;
     name: string;
@@ -22,6 +54,7 @@ export interface ITreeNode {
     position: string;
     image?: string;
     isBrigadier?: boolean;
+    orders?: TOrder[];
   };
   children?: ITreeNode[];
 }

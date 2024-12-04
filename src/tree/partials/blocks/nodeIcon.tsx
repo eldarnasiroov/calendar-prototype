@@ -1,7 +1,12 @@
 import { ENTITY_TYPES, SMALL_HEIGHT } from "../../common/constants";
-import { reduce } from "lodash";
+import { reduce, find } from "lodash";
 import { Folder } from "../../common/folder";
 import { ITreeNode } from "../../common/types";
+import { useMemo } from "react";
+import {
+  getBrigadierFromNode,
+  getCountOfWorkplaces,
+} from "../../common/helpers";
 
 interface Props {
   node: ITreeNode;
@@ -9,11 +14,13 @@ interface Props {
 }
 
 export const NodeIcon: React.FC<Props> = ({ node, size = "medium" }) => {
-  const workplacesCount = reduce(
-    node.children,
-    (acc, item: ITreeNode) => acc + (item.type === "workplace" ? 1 : 0),
-    0
-  );
+  const brigadier = useMemo(() => {
+    return getBrigadierFromNode(node);
+  }, [node]);
+
+  const workplacesCount = useMemo(() => {
+    return getCountOfWorkplaces(node);
+  }, [node]);
 
   return (
     <div
@@ -54,7 +61,7 @@ export const NodeIcon: React.FC<Props> = ({ node, size = "medium" }) => {
             className="tree-node__image"
             width={size === "small" ? 35 : 65}
             height={size === "small" ? 35 : 65}
-            src={node?.brigadier?.image}
+            src={brigadier?.worker?.image}
             alt=""
             style={{ top: "12px" }}
           />

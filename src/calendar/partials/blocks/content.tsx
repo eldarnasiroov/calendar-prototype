@@ -2,22 +2,13 @@ import { useState } from "react";
 import "./content.scss";
 
 export const Content = ({ index, data, onClick = (a) => {} }) => {
-  const colors = {
-    0: "#1745E1",
-    1: "#FD3132",
-    2: "#3EAC4D",
-    3: "#1745E1",
-    4: "#FD3132",
-    5: "#3EAC4D",
-    6: "#1745E1",
-  };
-
+  const colors = ["#1745E1", "#FD3132", "#3EAC4D"];
 
   return (
     <div
       className="calendar-content-column_wrapper"
       style={{
-        borderRight: `4px solid ${colors[index]}`,
+        borderRight: `4px solid ${colors[index % colors.length]}`,
       }}
       onClick={() => onClick(data)}
     >
@@ -26,8 +17,7 @@ export const Content = ({ index, data, onClick = (a) => {} }) => {
           <div
             className="column-avatar"
             style={{
-              borderLeft: `4px dotted ${colors[index]}`,
-              border: `4px solid ${colors[index]}`,
+              borderColor: colors[index % colors.length],
             }}
           >
             <img
