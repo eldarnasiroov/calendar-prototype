@@ -8,22 +8,29 @@ interface Props {
   title: string;
   value: string;
   children?: React.ReactNode;
+  open?: boolean;
+  setOpen?: (open: boolean) => void;
 }
 
-export const Dropdown: React.FC<Props> = ({ title, value, children }) => {
-  const [isOpen, setIsOpen] = useState(false);
+export const Dropdown: React.FC<Props> = ({
+  title,
+  value,
+  children,
+  open,
+  setOpen = () => {},
+}) => {
   return (
     <>
       <div
         className="calendar-dropdown__wrapper"
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() => setOpen(!open)}
       >
         <div style={{ padding: "5px" }}>
           <div>{title}</div>
           <div>{value}</div>
         </div>
         <FontAwesomeIcon
-          icon={isOpen ? faChevronUp : faChevronDown}
+          icon={open ? faChevronUp : faChevronDown}
           color="orange"
         />
         <div
@@ -32,10 +39,10 @@ export const Dropdown: React.FC<Props> = ({ title, value, children }) => {
             e.stopPropagation();
           }}
           style={{
-            maxHeight: isOpen ? "500px" : 0,
-            width: isOpen ? "350px" : 0,
+            maxHeight: open ? "500px" : 0,
+            width: open ? "350px" : 0,
             transition: "max-height 0.3s ease, width 0.3s ease",
-            overflow: isOpen ? "scroll" : "hidden",
+            overflow: open ? "scroll" : "hidden",
           }}
         >
           <div
