@@ -17,6 +17,7 @@ export const Tree: React.FC<ITreeProps> = ({
   selectable,
   onSelect,
   selectedNodes,
+  onClick = () => {},
 }) => {
   const ref = useRef<any>(null);
 
@@ -132,6 +133,7 @@ export const Tree: React.FC<ITreeProps> = ({
             selectable={selectable}
             onSelect={handleSelect}
             selectedNodes={selectedNodes}
+            onClick={onClick}
           />
         ))}
       </div>

@@ -1,8 +1,14 @@
-import { useState } from "react";
+import { ITreeNode } from "../../../tree/common/types";
+import { find } from "lodash";
 import "./content.scss";
 
 export const Content = ({ index, data, onClick = (a) => {} }) => {
   const colors = ["#1745E1", "#FD3132", "#3EAC4D"];
+  const isBrigade = data?.type === "brigade";
+  const brigadier = find(
+    data?.children,
+    (item: ITreeNode) => item?.worker?.isBrigadier
+  );
 
   return (
     <div
@@ -21,7 +27,7 @@ export const Content = ({ index, data, onClick = (a) => {} }) => {
             }}
           >
             <img
-              src="no_image_worker.svg"
+              src={isBrigade ? brigadier?.worker?.image : data?.worker?.image}
               alt=""
               className="column-avatar_image"
             />
@@ -34,52 +40,11 @@ export const Content = ({ index, data, onClick = (a) => {} }) => {
         <div
           className="calendar-orders_title"
           style={{
-            background: data.node.type === "brigade" ? "#E66F1B" : "#FFB20A",
+            background: data.type === "brigade" ? "#E66F1B" : "#FFB20A",
           }}
         >
-          {data.node.name}
+          {data.name}
         </div>
-
-        <div
-          style={{
-            width: "100%",
-            height: "70px",
-            background: "red",
-            borderRadius: "10px",
-            padding: "5px",
-            marginTop: "10px",
-          }}
-        ></div>
-        <div
-          style={{
-            width: "100%",
-            height: "50px",
-            background: "orange",
-            borderRadius: "10px",
-            padding: "5px",
-            marginTop: "10px",
-          }}
-        ></div>
-        <div
-          style={{
-            width: "100%",
-            height: "60px",
-            background: "green",
-            borderRadius: "10px",
-            padding: "5px",
-            marginTop: "10px",
-          }}
-        ></div>
-        <div
-          style={{
-            width: "100%",
-            height: "80px",
-            background: "blue",
-            borderRadius: "10px",
-            padding: "5px",
-            marginTop: "10px",
-          }}
-        ></div>
       </div>
     </div>
   );

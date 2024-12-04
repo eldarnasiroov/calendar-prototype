@@ -7,6 +7,7 @@ interface Props {
     nodes: ITreeNode[];
     onSelect?: any;
     selectedNodes?: any[];
+    onClick?: (node: ITreeNode) => void;
   };
 }
 
@@ -16,7 +17,7 @@ export const Header: React.FC<Props> = ({ treeProps }) => {
       <Dropdown
         title="Бригада"
         value="БР/СТО Апельсин"
-        children={<Tree size="small" selectable={true} {...treeProps} />}
+        children={<Tree size="small" selectable={false} {...treeProps} />}
       />
       <Dropdown title="Должность" value="Все" />
       <Dropdown title="Вид" value="По сотруд" />

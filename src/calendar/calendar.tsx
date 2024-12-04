@@ -4,7 +4,6 @@ import { mockData } from "./common/data";
 import { Body } from "./partials/body";
 import { Header } from "./partials/header";
 import { ITreeNode } from "../tree/common/types";
-import { some, forEach } from "lodash";
 
 interface SelectedNode {
   node: ITreeNode;
@@ -12,7 +11,11 @@ interface SelectedNode {
 }
 
 export const Calendar = () => {
-  const [selectedEntities, setSelectedEntities] = useState<SelectedNode[]>([]);
+  const [selectedEntities, setSelectedEntities] = useState(null);
+
+  const handleNodeClick = (node: ITreeNode) => {
+    setSelectedEntities(node);
+  };
 
   return (
     <div
@@ -29,11 +32,12 @@ export const Calendar = () => {
       <Header
         treeProps={{
           nodes: mockData,
-          onSelect: setSelectedEntities,
-          selectedNodes: selectedEntities,
+          // onSelect: setSelectedEntities,
+          // selectedNodes: selectedEntities,
+          onClick: handleNodeClick,
         }}
       />
-      <Body data={selectedEntities} />
+      <Body data={selectedEntities} onProfileClick={handleNodeClick} />
     </div>
   );
 };

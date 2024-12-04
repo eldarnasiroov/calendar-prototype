@@ -1,13 +1,14 @@
-.calendar-content-column_wrapper {
-  width: 100%;
-  max-width: 80px;
-  min-width: 60px;
+.calendar-left-column {
+  min-width: 100px;
+  max-width: 100px;
   height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  border-radius: 40px 40px 0 40px;
-  position: relative;
+  margin-top: 10px;
+  border-right: 6px solid black;
+  border-radius: 50px 50px 0 50px;
+//   padding: 5px;
 
   .column-avatar_wrapper {
     width: 100%;
@@ -24,7 +25,7 @@
       overflow: hidden;
       margin: 0;
       transform: rotate(45deg);
-      border-width: 4px;
+      border-width: 6px;
       border-style: solid solid solid dotted;
 
       .column-avatar_image {
@@ -35,21 +36,13 @@
       }
     }
   }
-
-  .calendar-orders_wrapper {
+  .calendar-orders_title {
     width: 100%;
-    display: flex;
-    flex-direction: column;
-    padding-right: 5px;
-
-    .calendar-orders_title {
-      width: 100%;
-      background: orange;
-      text-align: center;
-      font-size: 12px;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      overflow: hidden;
-    }
+    background: orange;
+    text-align: center;
+    font-size: 12px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
 }

@@ -22,6 +22,7 @@ export const TreeNode: React.FC<ITreeNodeProps> = ({
   selectable = false,
   selectedNodes = [],
   onSelect = () => {},
+  onClick = () => {},
 }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
@@ -53,7 +54,7 @@ export const TreeNode: React.FC<ITreeNodeProps> = ({
     >
       <div
         className="tree-node__wrapper"
-        onClick={hasChildren ? toggleOpen : () => {}}
+        onClick={() => onClick(node)}
         style={{
           width: open || isParentNode ? "100%" : "0px",
           height:
@@ -82,6 +83,7 @@ export const TreeNode: React.FC<ITreeNodeProps> = ({
             icon={isOpen ? faChevronDown : faChevronRight}
             size="3x"
             color="#9538EE"
+            onClick={hasChildren ? toggleOpen : () => {}}
           />
         )}
 
@@ -131,6 +133,7 @@ export const TreeNode: React.FC<ITreeNodeProps> = ({
               selectable={selectable}
               onSelect={onSelect}
               selectedNodes={selectedNodes}
+              onClick={onClick}
             />
           ))}
         </div>
