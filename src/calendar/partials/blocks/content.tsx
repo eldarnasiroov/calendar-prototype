@@ -1,6 +1,7 @@
 import { ITreeNode } from "../../../tree/common/types";
 import { find } from "lodash";
 import "./content.scss";
+import { getCountOfWorkplaces } from "../../../tree/common/helpers";
 
 export const Content = ({ index, data, onClick = (a) => {} }) => {
   const colors = ["#1745E1", "#FD3132", "#3EAC4D"];
@@ -45,6 +46,39 @@ export const Content = ({ index, data, onClick = (a) => {} }) => {
         >
           {data.name}
         </div>
+
+        {isBrigade && (
+        <div
+          style={{
+            marginTop: "5px",
+            background: "#FCCC9E",
+            width: "100%",
+            padding: "5px",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            borderRadius: "10px",
+            textAlign: "center",
+            lineHeight: "14px",
+            gap: "5px",
+          }}
+        >
+          <p style={{ margin: "0" }}>Сотрудн.</p>
+          <p style={{ margin: "0", fontWeight: "bold", color: "violet" }}>
+            {getCountOfWorkplaces(data)}
+          </p>
+          <p style={{ margin: "0" }}>Загруж-сть</p>
+          <p style={{ margin: "0", fontWeight: "bold" }}>{data.workload}%</p>
+          <p style={{ margin: "0" }}>Тек. заказы</p>
+          <p style={{ margin: "0" }}>
+            <span style={{ fontWeight: "bold", color: "violet" }}>{0}</span> на
+          </p>
+          <p style={{ margin: "0", fontWeight: "bold" }}>{0}₽</p>
+          <p style={{ margin: "0", fontWeight: "bold", color: "white" }}>
+            {0}%
+          </p>
+        </div>
+      )}
       </div>
     </div>
   );
