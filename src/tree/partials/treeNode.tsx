@@ -54,7 +54,6 @@ export const TreeNode: React.FC<ITreeNodeProps> = ({
     >
       <div
         className="tree-node__wrapper"
-        onClick={() => onClick(node)}
         style={{
           width: open || isParentNode ? "100%" : "0px",
           height:
@@ -65,7 +64,13 @@ export const TreeNode: React.FC<ITreeNodeProps> = ({
           fontSize: size === "small" ? "8px" : "",
         }}
       >
-        <div className="tree-node__info">
+        <div
+          className="tree-node__info"
+          onClick={(e) => {
+            e.stopPropagation();
+            onClick(node);
+          }}
+        >
           <NodeIcon node={node} size={size} />
 
           <div className="tree-node__label">
