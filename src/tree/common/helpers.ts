@@ -1,4 +1,4 @@
-import { reduce, find } from "lodash";
+import { reduce, find, flatMap } from "lodash";
 import { ITreeNode } from "./types";
 
 export const getCountOfWorkplaces = (obj) => {
@@ -19,3 +19,15 @@ export const getCountOfWorkplaces = (obj) => {
 
 export const getBrigadierFromNode = (node: ITreeNode) =>
   find(node.children, (item: ITreeNode) => item?.worker?.isBrigadier);
+
+export const getAllOrders = (data: ITreeNode): any[] => {
+  const flattenData = (nodes: ITreeNode[]): any[] => {
+    return flatMap(nodes, (node) => {
+      const childrenOrders = node.children ? flattenData(node.children) : [];
+      const workerOrders = node.worker?.orders || [];
+      return [...childrenOrders, ...workerOrders];
+    });
+  };
+
+  return flattenData([data]);
+};

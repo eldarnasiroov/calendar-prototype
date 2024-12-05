@@ -1,9 +1,13 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ITreeNode } from "../../../tree/common/types";
 import "./leftColumn.scss";
-import { find } from "lodash";
+import { find, sumBy, meanBy } from "lodash";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
-import { getCountOfWorkplaces } from "../../../tree/common/helpers";
+import {
+  getAllOrders,
+  getCountOfWorkplaces,
+} from "../../../tree/common/helpers";
+import { useMemo } from "react";
 
 interface Props {
   data: ITreeNode;
@@ -17,6 +21,17 @@ export const LeftColumn: React.FC<Props> = ({ data }) => {
     data?.children,
     (item: ITreeNode) => item?.worker?.isBrigadier
   );
+
+  const orders = useMemo(() => getAllOrders(data), [data]);
+  const commonInformation = useMemo(() => {
+    return {
+      quantity: orders?.length,
+      totalSum: sumBy(orders, "total_sum")?.toLocaleString("ru-RU"),
+      averagePercentOfWork: parseFloat(
+        meanBy(orders, "percent_of_work").toFixed(2)
+      ),
+    };
+  }, [orders]);
 
   return (
     <div className="calendar-left-column">
@@ -61,10 +76,15 @@ export const LeftColumn: React.FC<Props> = ({ data }) => {
           <p className="fw-bold">{data.workload}%</p>
           <p>Тек. заказы</p>
           <p>
-            <span className="color-violet fw-bold">{0}</span> на
+            <span className="color-violet fw-bold">
+              {commonInformation.quantity || 0}
+            </span>{" "}
+            на
           </p>
-          <p className=" fw-bold">{0}₽</p>
-          <p className="fw-bold color-white">{0}%</p>
+          <p className=" fw-bold">{commonInformation.totalSum}₽</p>
+          <p className="fw-bold color-white">
+            {commonInformation.averagePercentOfWork}%
+          </p>
         </div>
       )}
     </div>
