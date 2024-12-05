@@ -54,35 +54,17 @@ export const LeftColumn: React.FC<Props> = ({ data }) => {
       </div>
 
       {isBrigade && (
-        <div
-          style={{
-            marginTop: "5px",
-            background: "#FCCC9E",
-            width: "100%",
-            padding: "5px",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            borderRadius: "10px",
-            textAlign: "center",
-            lineHeight: "14px",
-            gap: "5px",
-          }}
-        >
-          <p style={{ margin: "0" }}>Сотрудн.</p>
-          <p style={{ margin: "0", fontWeight: "bold", color: "violet" }}>
-            {getCountOfWorkplaces(data)}
+        <div className="calendar-brigade_info">
+          <p>Сотрудн.</p>
+          <p className="color-violet fw-bold">{getCountOfWorkplaces(data)}</p>
+          <p>Загруж-сть</p>
+          <p className="fw-bold">{data.workload}%</p>
+          <p>Тек. заказы</p>
+          <p>
+            <span className="color-violet fw-bold">{0}</span> на
           </p>
-          <p style={{ margin: "0" }}>Загруж-сть</p>
-          <p style={{ margin: "0", fontWeight: "bold" }}>{data.workload}%</p>
-          <p style={{ margin: "0" }}>Тек. заказы</p>
-          <p style={{ margin: "0" }}>
-            <span style={{ fontWeight: "bold", color: "violet" }}>{0}</span> на
-          </p>
-          <p style={{ margin: "0", fontWeight: "bold" }}>{0}₽</p>
-          <p style={{ margin: "0", fontWeight: "bold", color: "white" }}>
-            {0}%
-          </p>
+          <p className=" fw-bold">{0}₽</p>
+          <p className="fw-bold color-white">{0}%</p>
         </div>
       )}
     </div>

@@ -51,5 +51,37 @@
       text-overflow: ellipsis;
       overflow: hidden;
     }
+
+    .calendar-brigade_rating {
+      display: flex;
+      gap: 3px;
+      justify-content: center;
+    }
+
+    .calendar-brigade_info {
+      margin-top: 5px;
+      background: #fccc9e;
+      width: 100%;
+      padding: 5px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      border-radius: 10px;
+      text-align: center;
+      line-height: 14px;
+      gap: 5px;
+      p {
+        margin: 0;
+      }
+      .fw-bold {
+        font-weight: bold;
+      }
+      .color-violet {
+        color: violet;
+      }
+      .color-white {
+        color: white;
+      }
+    }
   }
 }
