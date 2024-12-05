@@ -1,5 +1,5 @@
-import { ITreeNode } from "../../../tree/common/types";
-import { find, sumBy, meanBy } from "lodash";
+import { ITreeNode, TOrder } from "../../../tree/common/types";
+import { find, sumBy, meanBy, map } from "lodash";
 import "./content.scss";
 import {
   getAllOrders,
@@ -8,9 +8,10 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { useMemo } from "react";
+import { orderColors } from "../../common/constants";
 
 export const Content = ({ index, data, onClick = (a) => {} }) => {
-  const colors = ["#1745E1", "#FD3132", "#3EAC4D"];
+  const borderColors = ["#1745E1", "#FD3132", "#3EAC4D"];
 
   const isBrigade = data?.type === "brigade";
   const brigadier = find(
@@ -33,7 +34,7 @@ export const Content = ({ index, data, onClick = (a) => {} }) => {
     <div
       className="calendar-content-column_wrapper"
       style={{
-        borderRight: `4px solid ${colors[index % colors.length]}`,
+        borderRight: `4px solid ${borderColors[index % borderColors.length]}`,
       }}
     >
       <div>
@@ -41,7 +42,7 @@ export const Content = ({ index, data, onClick = (a) => {} }) => {
           <div
             className="column-avatar"
             style={{
-              borderColor: colors[index % colors.length],
+              borderColor: borderColors[index % borderColors.length],
             }}
           >
             <img
@@ -92,6 +93,31 @@ export const Content = ({ index, data, onClick = (a) => {} }) => {
             </p>
           </div>
         )}
+        {map(orders, (item: TOrder) => (
+          <div
+            key={item.id}
+            style={{
+              width: "100%",
+              background: orderColors[item.order_status],
+              padding: "5px",
+              display: "flex",
+              alignItems: "center",
+              flexDirection: "column",
+              borderRadius: "5px",
+              marginTop: "10px",
+            }}
+          >
+            <div
+              style={{
+                background: "#FFB20A",
+                padding: "0px 3px",
+                marginBottom: "20px",
+              }}
+            >
+              {item.id}
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );

@@ -1,13 +1,13 @@
 .calendar-left-column {
   min-width: 100px;
   max-width: 100px;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-top: 10px;
   border-right: 6px solid black;
-  border-radius: 50px 50px 0 50px;
+  border-radius: 50px 50px 0 50px;;
 
   .column-avatar_wrapper {
     width: 100%;
@@ -43,6 +43,7 @@
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
+    min-height: 19px;
   }
 
   .calendar-brigade_info {

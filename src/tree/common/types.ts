@@ -1,4 +1,4 @@
-interface TOrder {
+export interface TOrder {
   /**
    * ID заказа
    */
