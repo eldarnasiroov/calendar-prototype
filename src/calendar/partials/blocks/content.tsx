@@ -2,6 +2,8 @@ import { ITreeNode } from "../../../tree/common/types";
 import { find } from "lodash";
 import "./content.scss";
 import { getCountOfWorkplaces } from "../../../tree/common/helpers";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
 
 export const Content = ({ index, data, onClick = (a) => {} }) => {
   const colors = ["#1745E1", "#FD3132", "#3EAC4D"];
@@ -44,6 +46,15 @@ export const Content = ({ index, data, onClick = (a) => {} }) => {
           }}
         >
           {data.name}
+        </div>
+
+        <div style={{ display: "flex", gap: "3px", justifyContent: "center" }}>
+          <span>4.6</span>
+          <FontAwesomeIcon
+            icon={faStar}
+            color="#FFB20A"
+            style={{ marginTop: "3px" }}
+          />
         </div>
 
         {isBrigade && (
