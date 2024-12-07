@@ -26,12 +26,12 @@ export const Header: React.FC = () => {
   const [treeDropdownOpen, setTreeDropdownOpen] = useState(false);
 
   const handleBack = () => {
-    const test = findObjectWithMatchingParentId(
+    const parentEntity = findObjectWithMatchingParentId(
       // !To Do
       mockData[0],
       selectedEntities.parentId
     );
-    if (test) dispatch(setSelectedEntities(test));
+    if (parentEntity) dispatch(setSelectedEntities(parentEntity));
   };
 
   return (
