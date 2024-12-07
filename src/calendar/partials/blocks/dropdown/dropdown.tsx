@@ -10,6 +10,7 @@ interface Props {
   children?: React.ReactNode;
   open?: boolean;
   setOpen?: (open: boolean) => void;
+  leftButton?: React.ReactNode;
 }
 
 export const Dropdown: React.FC<Props> = ({
@@ -18,21 +19,25 @@ export const Dropdown: React.FC<Props> = ({
   children,
   open,
   setOpen = () => {},
+  leftButton,
 }) => {
   return (
     <>
-      <div
-        className="calendar-dropdown__wrapper"
-        onClick={() => setOpen(!open)}
-      >
-        <div style={{ padding: "5px" }}>
-          <div>{title}</div>
-          <div>{value}</div>
+      <div className="calendar-dropdown__wrapper">
+        {leftButton && leftButton}
+        <div
+          style={{ display: "flex", alignItems: "center", gap: "5px" }}
+          onClick={() => setOpen(!open)}
+        >
+          <div style={{ padding: "5px" }}>
+            <div>{title}</div>
+            <div>{value}</div>
+          </div>
+          <FontAwesomeIcon
+            icon={open ? faChevronUp : faChevronDown}
+            color="orange"
+          />
         </div>
-        <FontAwesomeIcon
-          icon={open ? faChevronUp : faChevronDown}
-          color="orange"
-        />
         <div
           className="calendar-dropdown"
           onClick={(e) => {

@@ -6,11 +6,6 @@ import { ITreeNode, ITreeProps } from "./common/types";
 import "./tree.scss";
 import { TreeNode } from "./partials/treeNode";
 
-interface SelectedNode {
-  node: ITreeNode;
-  depth: number;
-}
-
 export const Tree: React.FC<ITreeProps> = ({
   nodes,
   size = "medium",

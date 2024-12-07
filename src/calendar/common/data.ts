@@ -1,4 +1,4 @@
-import { ITreeNode } from "../../tree/common/types";
+import { ITreeNode } from "../components/tree/common/types";
 
 export const mockData: ITreeNode[] = [
   {

@@ -1,17 +1,21 @@
-import { ITreeNode, TOrder } from "../../../tree/common/types";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { ITreeNode, TOrder } from "../../../components/tree/common/types";
+import "./leftColumn.scss";
 import { find, sumBy, meanBy, map } from "lodash";
-import "./content.scss";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
 import {
   getAllOrders,
   getCountOfWorkplaces,
-} from "../../../tree/common/helpers";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar } from "@fortawesome/free-solid-svg-icons";
+} from "../../../components/tree/common/helpers";
 import { useMemo } from "react";
-import { orderColors } from "../../common/constants";
+import { orderColors } from "../../../common/constants";
 
-export const Content = ({ index, data, onClick = (a) => {} }) => {
-  const borderColors = ["#1745E1", "#FD3132", "#3EAC4D"];
+interface Props {
+  data: ITreeNode;
+}
+
+export const LeftColumn: React.FC<Props> = ({ data }) => {
+  if (!data) return null;
 
   const isBrigade = data?.type === "brigade";
   const brigadier = find(
@@ -31,18 +35,13 @@ export const Content = ({ index, data, onClick = (a) => {} }) => {
   }, [orders]);
 
   return (
-    <div
-      className="calendar-content-column_wrapper"
-      style={{
-        borderRight: `4px solid ${borderColors[index % borderColors.length]}`,
-      }}
-    >
+    <div className="calendar-left-column">
       <div>
-        <div className="column-avatar_wrapper" onClick={() => onClick(data)}>
+        <div className="column-avatar_wrapper">
           <div
             className="column-avatar"
             style={{
-              borderColor: borderColors[index % borderColors.length],
+              borderColor: "black",
             }}
           >
             <img
@@ -53,9 +52,16 @@ export const Content = ({ index, data, onClick = (a) => {} }) => {
           </div>
         </div>
       </div>
-
-      {/* Контейнер для задач */}
-      <div className="calendar-orders_wrapper">
+      <div
+        style={{
+          width: "100%",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          alignItems: "center",
+          padding: "5px",
+        }}
+      >
         <div
           className="calendar-orders_title"
           style={{
@@ -64,13 +70,12 @@ export const Content = ({ index, data, onClick = (a) => {} }) => {
         >
           {data.name}
         </div>
-
-        <div className="calendar-brigade_rating">
+        <div style={{ display: "flex", gap: "3px" }}>
           <span>4.6</span>
           <FontAwesomeIcon
             icon={faStar}
             color="#FFB20A"
-            style={{ marginTop: "3px" }}
+            style={{ marginTop: "3.4px" }}
           />
         </div>
 
@@ -83,7 +88,7 @@ export const Content = ({ index, data, onClick = (a) => {} }) => {
             <p>Тек. заказы</p>
             <p>
               <span className="color-violet fw-bold">
-                {commonInformation.quantity}
+                {commonInformation.quantity || 0}
               </span>{" "}
               на
             </p>
@@ -93,6 +98,7 @@ export const Content = ({ index, data, onClick = (a) => {} }) => {
             </p>
           </div>
         )}
+
         {map(orders, (item: TOrder) => (
           <div
             key={item.id}

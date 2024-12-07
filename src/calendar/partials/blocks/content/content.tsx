@@ -1,21 +1,17 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { ITreeNode, TOrder } from "../../../tree/common/types";
-import "./leftColumn.scss";
+import { ITreeNode, TOrder } from "../../../components/tree/common/types";
 import { find, sumBy, meanBy, map } from "lodash";
-import { faStar } from "@fortawesome/free-solid-svg-icons";
+import "./content.scss";
 import {
   getAllOrders,
   getCountOfWorkplaces,
-} from "../../../tree/common/helpers";
+} from "../../../components/tree/common/helpers";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { useMemo } from "react";
-import { orderColors } from "../../common/constants";
+import { orderColors } from "../../../common/constants";
 
-interface Props {
-  data: ITreeNode;
-}
-
-export const LeftColumn: React.FC<Props> = ({ data }) => {
-  if (!data) return null;
+export const Content = ({ index, data, onClick = (a) => {} }) => {
+  const borderColors = ["#1745E1", "#FD3132", "#3EAC4D"];
 
   const isBrigade = data?.type === "brigade";
   const brigadier = find(
@@ -35,13 +31,18 @@ export const LeftColumn: React.FC<Props> = ({ data }) => {
   }, [orders]);
 
   return (
-    <div className="calendar-left-column">
+    <div
+      className="calendar-content-column_wrapper"
+      style={{
+        borderRight: `4px solid ${borderColors[index % borderColors.length]}`,
+      }}
+    >
       <div>
-        <div className="column-avatar_wrapper">
+        <div className="column-avatar_wrapper" onClick={() => onClick(data)}>
           <div
             className="column-avatar"
             style={{
-              borderColor: "black",
+              borderColor: borderColors[index % borderColors.length],
             }}
           >
             <img
@@ -52,16 +53,9 @@ export const LeftColumn: React.FC<Props> = ({ data }) => {
           </div>
         </div>
       </div>
-      <div
-        style={{
-          width: "100%",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-          alignItems: "center",
-          padding: "5px",
-        }}
-      >
+
+      {/* Контейнер для задач */}
+      <div className="calendar-orders_wrapper">
         <div
           className="calendar-orders_title"
           style={{
@@ -70,12 +64,13 @@ export const LeftColumn: React.FC<Props> = ({ data }) => {
         >
           {data.name}
         </div>
-        <div style={{ display: "flex", gap: "3px" }}>
+
+        <div className="calendar-brigade_rating">
           <span>4.6</span>
           <FontAwesomeIcon
             icon={faStar}
             color="#FFB20A"
-            style={{ marginTop: "3.4px" }}
+            style={{ marginTop: "3px" }}
           />
         </div>
 
@@ -88,7 +83,7 @@ export const LeftColumn: React.FC<Props> = ({ data }) => {
             <p>Тек. заказы</p>
             <p>
               <span className="color-violet fw-bold">
-                {commonInformation.quantity || 0}
+                {commonInformation.quantity}
               </span>{" "}
               на
             </p>
@@ -98,7 +93,6 @@ export const LeftColumn: React.FC<Props> = ({ data }) => {
             </p>
           </div>
         )}
-
         {map(orders, (item: TOrder) => (
           <div
             key={item.id}

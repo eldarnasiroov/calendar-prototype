@@ -1,7 +1,9 @@
 import { useState } from "react";
-import { Tree } from "../../tree";
-import { ITreeNode } from "../../tree/common/types";
-import { Dropdown } from "./blocks/dropdown";
+import { Tree } from "../components/tree";
+import { ITreeNode } from "../components/tree/common/types";
+import { Dropdown } from "./blocks/dropdown/dropdown";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 
 interface Props {
   treeProps: {
@@ -13,13 +15,20 @@ interface Props {
 }
 
 export const Header: React.FC<Props> = ({ treeProps }) => {
-  const [treeDropdownOpen, setTreeDropdownOpen] = useState(false);
+  const [treeDropdownOpen, setTreeDropdownOpen] = useState(false); 
 
   return (
     <div className="calendar-header">
       <Dropdown
         title="Бригада"
         value="БР/СТО Апельсин"
+        open={treeDropdownOpen}
+        setOpen={setTreeDropdownOpen}
+        leftButton={
+          <div style={{ backgroundColor: "red", padding: "5px" }}>
+            <FontAwesomeIcon icon={faChevronLeft} size="2x" />
+          </div>
+        }
         children={
           <Tree
             size="small"
@@ -31,8 +40,6 @@ export const Header: React.FC<Props> = ({ treeProps }) => {
             }}
           />
         }
-        open={treeDropdownOpen}
-        setOpen={setTreeDropdownOpen}
       />
       <Dropdown title="Должность" value="Все" />
       <Dropdown title="Вид" value="По сотруд" />

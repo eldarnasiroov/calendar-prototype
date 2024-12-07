@@ -1,9 +1,8 @@
-import { ITreeNode } from "../../tree/common/types";
-import { Content } from "./blocks/content";
+import { ITreeNode } from "../components/tree/common/types";
+import { Content } from "./blocks/content/content";
 import { map } from "lodash";
-import "./blocks/content.scss";
 import "../calendar.scss";
-import { LeftColumn } from "./blocks/leftColumn";
+import { LeftColumn } from "./blocks/leftColumn/leftColumn";
 
 interface Props {
   data: ITreeNode;
