@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { mockData } from "../common/data";
 import { setSelectedEntities } from "../common/redux/calendarSlice";
 import { getSelectedEntities } from "../common/redux/selectors";
+import { findObjectWithMatchingParentId } from "../common/helpers";
 
 interface Props {
   treeProps: {
@@ -21,9 +22,17 @@ interface Props {
 export const Header: React.FC = () => {
   const dispatch = useDispatch();
   const selectedEntities: ITreeNode = useSelector(getSelectedEntities);
-  console.log("🚀 ~ selectedEntities:", selectedEntities);
 
   const [treeDropdownOpen, setTreeDropdownOpen] = useState(false);
+
+  const handleBack = () => {
+    const test = findObjectWithMatchingParentId(
+      // !To Do
+      mockData[0],
+      selectedEntities.parentId
+    );
+    if (test) dispatch(setSelectedEntities(test));
+  };
 
   return (
     <div className="calendar-header">
@@ -33,7 +42,7 @@ export const Header: React.FC = () => {
         open={treeDropdownOpen}
         setOpen={setTreeDropdownOpen}
         leftButton={
-          <div style={{ padding: "5px" }}>
+          <div style={{ padding: "5px" }} onClick={handleBack}>
             <FontAwesomeIcon
               icon={faChevronLeft}
               size="2x"

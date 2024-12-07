@@ -1,4 +1,4 @@
-import { reduce, find, flatMap } from "lodash";
+import { reduce, find, flatMap, some } from "lodash";
 import { ITreeNode } from "../components/tree/common/types";
 
 export const getCountOfWorkplaces = (obj) => {
@@ -31,3 +31,18 @@ export const getAllOrders = (data: ITreeNode): any[] => {
 
   return flattenData([data]);
 };
+
+export function findObjectWithMatchingParentId(data, parentId) {
+  if (
+    data.id === parentId &&
+    some(data.children, (child) => child.parentId === parentId)
+  ) {
+    return data;
+  }
+
+  return (
+    find(data.children, (child) =>
+      findObjectWithMatchingParentId(child, parentId)
+    ) || null
+  );
+}
