@@ -4,7 +4,7 @@ import "./content.scss";
 import {
   getAllOrders,
   getCountOfWorkplaces,
-} from "../../../components/tree/common/helpers";
+} from "../../../common/helpers";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { useMemo } from "react";
@@ -14,7 +14,7 @@ import { setSelectedEntities } from "../../../common/redux/calendarSlice";
 
 export const Content = ({ index, data, }) => {
   const dispatch = useDispatch();
-  
+
   const borderColors = ["#1745E1", "#FD3132", "#3EAC4D"];
 
   const isBrigade = data?.type === "brigade";

@@ -1,5 +1,5 @@
 import { reduce, find, flatMap } from "lodash";
-import { ITreeNode } from "./types";
+import { ITreeNode } from "../components/tree/common/types";
 
 export const getCountOfWorkplaces = (obj) => {
   return reduce(

@@ -6,7 +6,7 @@ import { useMemo } from "react";
 import {
   getBrigadierFromNode,
   getCountOfWorkplaces,
-} from "../../common/helpers";
+} from "../../../../common/helpers";
 
 interface Props {
   node: ITreeNode;

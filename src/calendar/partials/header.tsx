@@ -4,9 +4,10 @@ import { ITreeNode } from "../components/tree/common/types";
 import { Dropdown } from "./blocks/dropdown/dropdown";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { mockData } from "../common/data";
 import { setSelectedEntities } from "../common/redux/calendarSlice";
+import { getSelectedEntities } from "../common/redux/selectors";
 
 interface Props {
   treeProps: {
@@ -19,6 +20,8 @@ interface Props {
 
 export const Header: React.FC = () => {
   const dispatch = useDispatch();
+  const selectedEntities: ITreeNode = useSelector(getSelectedEntities);
+  console.log("🚀 ~ selectedEntities:", selectedEntities);
 
   const [treeDropdownOpen, setTreeDropdownOpen] = useState(false);
 
@@ -30,8 +33,12 @@ export const Header: React.FC = () => {
         open={treeDropdownOpen}
         setOpen={setTreeDropdownOpen}
         leftButton={
-          <div style={{ backgroundColor: "red", padding: "5px" }}>
-            <FontAwesomeIcon icon={faChevronLeft} size="2x" />
+          <div style={{ padding: "5px" }}>
+            <FontAwesomeIcon
+              icon={faChevronLeft}
+              size="2x"
+              color={selectedEntities?.parentId ? "black" : "grey"}
+            />
           </div>
         }
         children={

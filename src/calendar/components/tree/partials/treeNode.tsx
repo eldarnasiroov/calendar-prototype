@@ -11,7 +11,7 @@ import {
 import { Button } from "antd";
 import "./treeNode.scss";
 import { NodeIcon } from "./blocks/nodeIcon";
-import { getBrigadierFromNode } from "../common/helpers";
+import { getBrigadierFromNode } from "../../../common/helpers";
 
 export const TreeNode: React.FC<ITreeNodeProps> = ({
   node,

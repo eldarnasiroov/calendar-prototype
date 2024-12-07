@@ -6,7 +6,7 @@ import { faStar } from "@fortawesome/free-solid-svg-icons";
 import {
   getAllOrders,
   getCountOfWorkplaces,
-} from "../../../components/tree/common/helpers";
+} from "../../../common/helpers";
 import { useMemo } from "react";
 import { orderColors } from "../../../common/constants";
 
