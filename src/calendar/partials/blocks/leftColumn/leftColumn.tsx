@@ -3,12 +3,9 @@ import { ITreeNode, TOrder } from "../../../components/tree/common/types";
 import "./leftColumn.scss";
 import { find, sumBy, meanBy, map } from "lodash";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
-import {
-  getAllOrders,
-  getCountOfWorkplaces,
-} from "../../../common/helpers";
+import { getAllOrders, getCountOfWorkplaces } from "../../../common/helpers";
 import { useMemo } from "react";
-import { orderColors } from "../../../common/constants";
+import { orderColors, statuses } from "../../../common/constants";
 
 interface Props {
   data: ITreeNode;
@@ -52,16 +49,7 @@ export const LeftColumn: React.FC<Props> = ({ data }) => {
           </div>
         </div>
       </div>
-      <div
-        style={{
-          width: "100%",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-          alignItems: "center",
-          padding: "5px",
-        }}
-      >
+      <div className="calendar-left-column__wrapper">
         <div
           className="calendar-orders_title"
           style={{
@@ -101,26 +89,22 @@ export const LeftColumn: React.FC<Props> = ({ data }) => {
 
         {map(orders, (item: TOrder) => (
           <div
+            className="calendar-order"
             key={item.id}
             style={{
-              width: "100%",
               background: orderColors[item.order_status],
-              padding: "5px",
-              display: "flex",
-              alignItems: "center",
-              flexDirection: "column",
-              borderRadius: "5px",
-              marginTop: "10px",
             }}
           >
-            <div
-              style={{
-                background: "#FFB20A",
-                padding: "0px 3px",
-                marginBottom: "20px",
-              }}
-            >
-              {item.id}
+            <div className="calendar-order_id">{item.id}</div>
+            <div className="calendar-order_info">
+              <p>Владислав М.</p>
+              <p>Мазда</p>
+              <p>Замена масла</p>
+              <p>Масло</p>
+              <p>{statuses[item.order_status]}</p>
+            </div>
+            <div className="calendar-order_percent">
+              {item.percent_of_work}%
             </div>
           </div>
         ))}

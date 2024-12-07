@@ -3,3 +3,9 @@ export const orderColors = {
   completed: "#F0D36F",
   in_progress: "#71B745",
 };
+
+export const statuses = {
+  in_progress: "В работе",
+  completed: "Выполнено",
+  pending: "В ожидании",
+};

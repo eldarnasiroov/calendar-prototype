@@ -69,7 +69,6 @@
       border-radius: 10px;
       text-align: center;
       line-height: 14px;
-      gap: 5px;
       p {
         margin: 0;
       }
@@ -81,6 +80,44 @@
       }
       .color-white {
         color: white;
+      }
+      .color-green {
+        color: green;
+      }
+    }
+
+    .calendar-order {
+      width: 100%;
+      padding: 5px;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      border-radius: 5px;
+      margin-top: 10px;
+      cursor: pointer;
+
+      .calendar-order_id {
+        background: #ffb20a;
+        padding: 0px 3px;
+      }
+
+      .calendar-order_info {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        font-size: 10px;
+        line-height: 10px;
+        p {
+          margin: 0;
+        }
+      }
+
+      .calendar-order_percent {
+        background: #ffb20a;
+        padding: 0px 3px;
+        color: white;
+        margin-top: 3px;
       }
     }
   }

@@ -58,7 +58,7 @@ export const mockData: ITreeNode[] = [
                     {
                       id: 9,
                       total_sum: 11000,
-                      percent_of_work: 16,
+                      percent_of_work: 100,
                       order_status: "completed",
                       finish_planned_at: new Date("2025-01-20"),
                       finished_at: new Date("2025-01-19"),
@@ -69,7 +69,7 @@ export const mockData: ITreeNode[] = [
                     {
                       id: 10,
                       total_sum: 30000,
-                      percent_of_work: 35,
+                      percent_of_work: 100,
                       order_status: "completed",
                       finish_planned_at: new Date("2025-01-25"),
                       finished_at: new Date("2025-01-24"),
@@ -109,7 +109,7 @@ export const mockData: ITreeNode[] = [
                 {
                   id: 2,
                   total_sum: 20000,
-                  percent_of_work: 20,
+                  percent_of_work: 100,
                   order_status: "completed",
                   finish_planned_at: new Date("2024-12-15"),
                   finished_at: new Date("2024-12-14"),
@@ -170,7 +170,7 @@ export const mockData: ITreeNode[] = [
                 {
                   id: 13,
                   total_sum: 13000,
-                  percent_of_work: 19,
+                  percent_of_work: 100,
                   order_status: "completed",
                   finish_planned_at: new Date("2025-02-10"),
                   finished_at: new Date("2025-02-09"),
@@ -209,7 +209,7 @@ export const mockData: ITreeNode[] = [
                 {
                   id: 14,
                   total_sum: 6000,
-                  percent_of_work: 7,
+                  percent_of_work: 100,
                   order_status: "completed",
                   finish_planned_at: new Date("2025-02-15"),
                   finished_at: new Date("2025-02-14"),
@@ -260,7 +260,7 @@ export const mockData: ITreeNode[] = [
             {
               id: 4,
               total_sum: 12000,
-              percent_of_work: 10,
+              percent_of_work: 100,
               order_status: "completed",
               finish_planned_at: new Date("2024-12-25"),
               finished_at: new Date("2024-12-24"),
@@ -282,7 +282,7 @@ export const mockData: ITreeNode[] = [
             {
               id: 6,
               total_sum: 14000,
-              percent_of_work: 12,
+              percent_of_work: 100,
               order_status: "completed",
               finish_planned_at: new Date("2025-01-05"),
               finished_at: new Date("2025-01-04"),
@@ -321,7 +321,7 @@ export const mockData: ITreeNode[] = [
             {
               id: 17,
               total_sum: 8000,
-              percent_of_work: 10,
+              percent_of_work: 100,
               order_status: "completed",
               finish_planned_at: new Date("2025-03-01"),
               finished_at: new Date("2025-02-28"),

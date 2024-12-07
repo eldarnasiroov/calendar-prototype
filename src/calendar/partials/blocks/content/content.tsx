@@ -1,18 +1,15 @@
 import { ITreeNode, TOrder } from "../../../components/tree/common/types";
 import { find, sumBy, meanBy, map } from "lodash";
 import "./content.scss";
-import {
-  getAllOrders,
-  getCountOfWorkplaces,
-} from "../../../common/helpers";
+import { getAllOrders, getCountOfWorkplaces } from "../../../common/helpers";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { useMemo } from "react";
-import { orderColors } from "../../../common/constants";
+import { orderColors, statuses } from "../../../common/constants";
 import { useDispatch } from "react-redux";
 import { setSelectedEntities } from "../../../common/redux/calendarSlice";
 
-export const Content = ({ index, data, }) => {
+export const Content = ({ index, data }) => {
   const dispatch = useDispatch();
 
   const borderColors = ["#1745E1", "#FD3132", "#3EAC4D"];
@@ -83,7 +80,22 @@ export const Content = ({ index, data, }) => {
 
         {isBrigade && (
           <div className="calendar-brigade_info">
-            <p>Сотрудн.</p>
+            <p style={{ fontSize: "8px", color: "grey" }}>Загружено:</p>
+            <p>
+              <span className="fw-bold color-violet">7</span> на{" "}
+              <span className="fw-bold color-white">{data.workload}%</span>
+            </p>
+            <p style={{ fontSize: "8px", color: "grey" }}>Заказы:</p>
+            <p>
+              <span className="fw-bold color-violet">
+                {commonInformation.quantity}
+              </span>{" "}
+              на{" "}
+              <span className="fw-bold color-green">
+                {commonInformation.totalSum}₽
+              </span>
+            </p>
+            {/* <p>Сотрудн.</p>
             <p className="color-violet fw-bold">{getCountOfWorkplaces(data)}</p>
             <p>Загруж-сть</p>
             <p className="fw-bold">{data.workload}%</p>
@@ -97,31 +109,27 @@ export const Content = ({ index, data, }) => {
             <p className=" fw-bold">{commonInformation.totalSum}₽</p>
             <p className="fw-bold color-white">
               {commonInformation.averagePercentOfWork}%
-            </p>
+            </p> */}
           </div>
         )}
         {map(orders, (item: TOrder) => (
           <div
+            className="calendar-order"
             key={item.id}
             style={{
-              width: "100%",
               background: orderColors[item.order_status],
-              padding: "5px",
-              display: "flex",
-              alignItems: "center",
-              flexDirection: "column",
-              borderRadius: "5px",
-              marginTop: "10px",
             }}
           >
-            <div
-              style={{
-                background: "#FFB20A",
-                padding: "0px 3px",
-                marginBottom: "20px",
-              }}
-            >
-              {item.id}
+            <div className="calendar-order_id">{item.id}</div>
+            <div className="calendar-order_info">
+              <p>Владислав М.</p>
+              <p>Мазда</p>
+              <p>Замена масла</p>
+              <p>Масло</p>
+              <p>{statuses[item.order_status]}</p>
+            </div>
+            <div className="calendar-order_percent">
+              {item.percent_of_work}%
             </div>
           </div>
         ))}
