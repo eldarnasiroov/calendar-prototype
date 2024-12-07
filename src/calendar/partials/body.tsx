@@ -7,7 +7,7 @@ import { getSelectedEntities } from "../common/redux/selectors";
 import { useSelector } from "react-redux";
 
 export const Body: React.FC = () => {
-  const selectedEntities = useSelector(getSelectedEntities);
+  const selectedEntities: ITreeNode = useSelector(getSelectedEntities);
 
   return (
     <div className="calendar-body">
