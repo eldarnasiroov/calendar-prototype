@@ -4,6 +4,9 @@ import { ITreeNode } from "../components/tree/common/types";
 import { Dropdown } from "./blocks/dropdown/dropdown";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
+import { useDispatch } from "react-redux";
+import { mockData } from "../common/data";
+import { setSelectedEntities } from "../common/redux/calendarSlice";
 
 interface Props {
   treeProps: {
@@ -14,8 +17,10 @@ interface Props {
   };
 }
 
-export const Header: React.FC<Props> = ({ treeProps }) => {
-  const [treeDropdownOpen, setTreeDropdownOpen] = useState(false); 
+export const Header: React.FC = () => {
+  const dispatch = useDispatch();
+
+  const [treeDropdownOpen, setTreeDropdownOpen] = useState(false);
 
   return (
     <div className="calendar-header">
@@ -33,10 +38,10 @@ export const Header: React.FC<Props> = ({ treeProps }) => {
           <Tree
             size="small"
             selectable={false}
-            {...treeProps}
+            nodes={mockData}
             onClick={(node: ITreeNode) => {
               setTreeDropdownOpen(false);
-              treeProps?.onClick && treeProps.onClick(node);
+              dispatch(setSelectedEntities(node));
             }}
           />
         }

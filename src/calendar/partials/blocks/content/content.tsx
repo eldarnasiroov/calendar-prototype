@@ -9,8 +9,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { useMemo } from "react";
 import { orderColors } from "../../../common/constants";
+import { useDispatch } from "react-redux";
+import { setSelectedEntities } from "../../../common/redux/calendarSlice";
 
-export const Content = ({ index, data, onClick = (a) => {} }) => {
+export const Content = ({ index, data, }) => {
+  const dispatch = useDispatch();
+  
   const borderColors = ["#1745E1", "#FD3132", "#3EAC4D"];
 
   const isBrigade = data?.type === "brigade";
@@ -38,7 +42,10 @@ export const Content = ({ index, data, onClick = (a) => {} }) => {
       }}
     >
       <div>
-        <div className="column-avatar_wrapper" onClick={() => onClick(data)}>
+        <div
+          className="column-avatar_wrapper"
+          onClick={() => dispatch(setSelectedEntities(data))}
+        >
           <div
             className="column-avatar"
             style={{

@@ -3,23 +3,18 @@ import { Content } from "./blocks/content/content";
 import { map } from "lodash";
 import "../calendar.scss";
 import { LeftColumn } from "./blocks/leftColumn/leftColumn";
+import { getSelectedEntities } from "../common/redux/selectors";
+import { useSelector } from "react-redux";
 
-interface Props {
-  data: ITreeNode;
-  onProfileClick?: (node: ITreeNode) => void;
-}
-
-export const Body: React.FC<Props> = ({ data, onProfileClick }) => {
-  const handleClick = (item: ITreeNode) => {
-    onProfileClick(item);
-  };
+export const Body: React.FC = () => {
+  const selectedEntities = useSelector(getSelectedEntities);
 
   return (
     <div className="calendar-body">
-      <LeftColumn data={data} />
+      <LeftColumn data={selectedEntities} />
       <div className="calendar-body__wrapper">
-        {map(data?.children, (item, index) => (
-          <Content key={item} index={index} data={item} onClick={handleClick} />
+        {map(selectedEntities?.children, (item, index) => (
+          <Content key={item} index={index} data={item} />
         ))}
       </div>
     </div>
