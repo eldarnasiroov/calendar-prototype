@@ -1,4 +1,5 @@
 import { ITreeNode } from "../components/tree/common/types";
+import { FAKE_CURRENT_USER_ID } from "./constants";
 
 export const mockData: ITreeNode[] = [
   {
@@ -346,3 +347,53 @@ export const mockData: ITreeNode[] = [
     ],
   },
 ];
+
+export const personalMockData: ITreeNode = {
+  id: FAKE_CURRENT_USER_ID,
+  parentId: null,
+  name: "Личный",
+  type: "workplace",
+  worker: {
+    id: 5,
+    name: "Семен",
+    surname: "Слепаков",
+    patronymic: "Александрович",
+    position: "Маляр",
+    image: "no_image_customer.svg",
+    orders: [
+      {
+        id: 1,
+        total_sum: 10000,
+        percent_of_work: 15,
+        order_status: "in_progress",
+        finish_planned_at: new Date("2024-12-10"),
+        finished_at: new Date("2024-12-09"),
+        start_planned_at: new Date("2024-12-01"),
+        started_at: new Date("2024-12-01"),
+        created_at: new Date("2024-11-30"),
+      },
+      {
+        id: 2,
+        total_sum: 20000,
+        percent_of_work: 100,
+        order_status: "completed",
+        finish_planned_at: new Date("2024-12-15"),
+        finished_at: new Date("2024-12-14"),
+        start_planned_at: new Date("2024-12-05"),
+        started_at: new Date("2024-12-05"),
+        created_at: new Date("2024-12-03"),
+      },
+      {
+        id: 3,
+        total_sum: 15000,
+        percent_of_work: 18,
+        order_status: "pending",
+        finish_planned_at: new Date("2024-12-20"),
+        finished_at: new Date("2024-12-19"),
+        start_planned_at: new Date("2024-12-10"),
+        started_at: new Date("2024-12-11"),
+        created_at: new Date("2024-12-09"),
+      },
+    ],
+  },
+};

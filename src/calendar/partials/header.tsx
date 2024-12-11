@@ -5,10 +5,11 @@ import { Dropdown } from "./blocks/dropdown/dropdown";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
-import { mockData } from "../common/data";
+import { mockData, personalMockData } from "../common/data";
 import { setSelectedEntities } from "../common/redux/calendarSlice";
 import { getSelectedEntities } from "../common/redux/selectors";
 import { findObjectWithMatchingParentId } from "../common/helpers";
+import { FAKE_CURRENT_USER_ID } from "../common/constants";
 
 interface Props {
   treeProps: {
@@ -26,12 +27,23 @@ export const Header: React.FC = () => {
   const [treeDropdownOpen, setTreeDropdownOpen] = useState(false);
 
   const handleBack = () => {
+    if (
+      !selectedEntities?.parentId &&
+      selectedEntities?.id === FAKE_CURRENT_USER_ID
+    ) {
+      return;
+    }
+    console.log("zawel");
     const parentEntity = findObjectWithMatchingParentId(
       // !To Do
       mockData[0],
       selectedEntities.parentId
     );
-    if (parentEntity) dispatch(setSelectedEntities(parentEntity));
+    if (parentEntity) {
+      dispatch(setSelectedEntities(parentEntity));
+      return;
+    }
+    dispatch(setSelectedEntities(personalMockData));
   };
 
   return (
@@ -46,7 +58,12 @@ export const Header: React.FC = () => {
             <FontAwesomeIcon
               icon={faChevronLeft}
               size="2x"
-              color={selectedEntities?.parentId ? "black" : "grey"}
+              color={
+                !!selectedEntities?.parentId ||
+                selectedEntities?.id !== FAKE_CURRENT_USER_ID
+                  ? "black"
+                  : "grey"
+              }
             />
           </div>
         }

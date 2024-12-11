@@ -9,3 +9,6 @@ export const statuses = {
   completed: "Выполнено",
   pending: "В ожидании",
 };
+
+
+export const FAKE_CURRENT_USER_ID = 777;
