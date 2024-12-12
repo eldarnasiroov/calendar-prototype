@@ -8,6 +8,7 @@ import { useMemo } from "react";
 import { orderColors, statuses } from "../../../common/constants";
 import { useDispatch } from "react-redux";
 import { setSelectedEntities } from "../../../common/redux/calendarSlice";
+import moment from "moment";
 
 export const Content = ({ index, data }) => {
   const dispatch = useDispatch();
@@ -112,27 +113,38 @@ export const Content = ({ index, data }) => {
             </p> */}
           </div>
         )}
-        {map(orders, (item: TOrder) => (
-          <div
-            className="calendar-order"
-            key={item.id}
-            style={{
-              background: orderColors[item.order_status],
-            }}
-          >
-            <div className="calendar-order_id">{item.id}</div>
-            <div className="calendar-order_info">
-              <p>Владислав М.</p>
-              <p>Мазда</p>
-              <p>Замена масла</p>
-              <p>Масло</p>
-              <p>{statuses[item.order_status]}</p>
+        {map(orders, (item: TOrder) => {
+          return (
+            <div
+              className="calendar-order"
+              key={item.id}
+              style={{
+                background: orderColors[item.order_status],
+                height: !isBrigade
+                  ? moment(item.finished_at).diff(
+                      item.started_at,
+                      "days",
+                      true
+                    ) *
+                      100 +
+                    "px"
+                  : "",
+              }}
+            >
+              <div className="calendar-order_id">{item.id}</div>
+              <div className="calendar-order_info">
+                <p>Владислав М.</p>
+                <p>Мазда</p>
+                <p>Замена масла</p>
+                <p>Масло</p>
+                <p>{statuses[item.order_status]}</p>
+              </div>
+              <div className="calendar-order_percent">
+                {item.percent_of_work}%
+              </div>
             </div>
-            <div className="calendar-order_percent">
-              {item.percent_of_work}%
-            </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );
