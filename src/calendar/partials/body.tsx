@@ -15,8 +15,8 @@ export const Body: React.FC = () => {
   return (
     <div className="calendar-body">
       <LeftColumn data={selectedEntities} />
-      <Timeline />
       <div className="calendar-body__wrapper">
+      <Timeline />
         {map(selectedEntities?.children, (item, index) => (
           <Content key={item} index={index} data={item} />
         ))}

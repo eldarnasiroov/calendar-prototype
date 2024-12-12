@@ -264,7 +264,7 @@ export const mockData: ITreeNode[] = [
               percent_of_work: 100,
               order_status: "completed",
               finish_planned_at: new Date("2024-12-25"),
-              finished_at: new Date("2024-12-24"),
+              finished_at: new Date("2024-12-17"),
               start_planned_at: new Date("2024-12-15"),
               started_at: new Date("2024-12-16"),
               created_at: new Date("2024-12-13"),

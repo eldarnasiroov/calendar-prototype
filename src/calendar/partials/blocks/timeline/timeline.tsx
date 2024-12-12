@@ -1,5 +1,7 @@
 import { map } from "lodash";
 import "./timeline.scss";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
 
 export const Timeline = () => {
   const JANUARY = 0;
@@ -17,55 +19,82 @@ export const Timeline = () => {
   return (
     <div
       style={{
-        // width: "50px",
+        display: "flex",
         width: "100%",
         minWidth: "60px",
         maxWidth: "80px",
-        height: "100%",
-        background: "grey",
-        display: "flex",
-        flexDirection: "column",
-        // marginBottom: '50px'
-        // paddingTop: "5px",
-        marginTop: "10px",
       }}
     >
-      <div>
-        <div
-          className="column-avatar_wrapper"
-          //   onClick={() => dispatch(setSelectedEntities(data))}
-        >
+      <div
+        style={{
+          // width: "50px",
+          width: "100%",
+          minWidth: "60px",
+          maxWidth: "80px",
+          height: "100%",
+          background: "#F6FEE6",
+          display: "flex",
+          flexDirection: "column",
+          // marginBottom: '50px'
+          // paddingTop: "5px",
+          // marginTop: "10px",
+        }}
+      >
+        <div style={{marginRight: '4px', marginBottom: '10px', opacity: '0'}}>
           <div
-            className="column-avatar"
-            style={
-              {
-                //   borderColor: borderColors[index % borderColors.length],
-              }
-            }
+            className="column-avatar_wrapper"
+            //   onClick={() => dispatch(setSelectedEntities(data))}
           >
-            <img
-              src={"no_image_worker.svg"}
-              alt=""
-              className="column-avatar_image"
+            <div
+              className="column-avatar"
+              style={
+                {
+                  //   borderColor: borderColors[index % borderColors.length],
+                }
+              }
+            >
+              <img
+                src={"no_image_worker.svg"}
+                alt=""
+                className="column-avatar_image"
+              />
+            </div>
+          </div>
+          <div
+            className="calendar-orders_title"
+            style={{
+              background: "#FFB20A",
+            }}
+          >
+            {/* {data.name} */} tt
+          </div>
+
+          <div className="calendar-brigade_rating">
+            <span>4.6</span>
+            <FontAwesomeIcon
+              icon={faStar}
+              color="#FFB20A"
+              style={{ marginTop: "3px" }}
             />
           </div>
         </div>
+        {map(getDaysOfMonth(2024, JANUARY), (item) => {
+          return (
+            <div
+              key={item}
+              style={{
+                width: "100%",
+                padding: "5px",
+                height: "100px",
+                borderBottom: "2px solid #D3D3D3",
+                borderRight: "2px solid #D3D3D3",
+              }}
+            >
+              {item}
+            </div>
+          );
+        })}
       </div>
-      {map(getDaysOfMonth(2024, JANUARY), (item) => {
-        return (
-          <div
-            key={item}
-            style={{
-              width: "100%",
-              padding: "5px",
-              height: "100px",
-              borderBottom: "2px solid black",
-            }}
-          >
-            {item}
-          </div>
-        );
-      })}
     </div>
   );
 };

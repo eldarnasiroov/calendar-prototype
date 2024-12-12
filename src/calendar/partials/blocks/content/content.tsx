@@ -120,6 +120,7 @@ export const Content = ({ index, data }) => {
               key={item.id}
               style={{
                 background: orderColors[item.order_status],
+                overflow: "hidden",
                 height: !isBrigade
                   ? moment(item.finished_at).diff(
                       item.started_at,
