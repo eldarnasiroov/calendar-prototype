@@ -1,26 +1,48 @@
-.column-avatar_wrapper {
+.calendar-timeline {
+  display: flex;
+  width: 100%;
+  min-width: 25px;
+  max-width: 25px;
+
+  .calendar-timeline__wrapper {
     width: 100%;
-    aspect-ratio: 1;
+    min-width: 25px;
+    max-width: 25px;
+    height: 100%;
+    background: #f6fee6;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
+    flex-direction: column;
+    align-items: flex-end;
 
-    .column-avatar {
-      height: 100%;
+    .calendar-timeline__item {
       width: 100%;
-      border-radius: 50%;
-      overflow: hidden;
-      margin: 0;
-      transform: rotate(45deg);
-      border-width: 4px;
-      border-style: solid solid solid dotted;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      position: relative;
 
-      .column-avatar_image {
+      .calendar-timeline__date {
+        width: 30%;
+        height: 50px;
+        border-bottom: 2px solid #d3d3d3;
+        border-right: 2px solid #d3d3d3;
+        text-align: center;
+        font-size: 10px;
+
+        .calendar-timeline__day {
+          position: absolute;
+          top: 5px;
+          right: 5px;
+        }
+      }
+
+      .calendar-timeline__line {
         width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transform: rotate(-45deg);
+        padding: 5px;
+        height: 50px;
+        border-bottom: 2px solid #d3d3d3;
+        border-right: 2px solid #d3d3d3;
       }
     }
   }
+}

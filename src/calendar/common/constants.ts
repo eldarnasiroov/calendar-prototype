@@ -12,3 +12,5 @@ export const statuses = {
 
 
 export const FAKE_CURRENT_USER_ID = 777;
+
+export const borderColors = ["#1745E1", "#FD3132", "#3EAC4D"];
