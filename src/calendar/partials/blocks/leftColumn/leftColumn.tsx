@@ -9,9 +9,10 @@ import { orderColors, statuses } from "../../../common/constants";
 
 interface Props {
   data: ITreeNode;
+  halfWidth?: boolean;
 }
 
-export const LeftColumn: React.FC<Props> = ({ data }) => {
+export const LeftColumn: React.FC<Props> = ({ data, halfWidth = false }) => {
   if (!data) return null;
 
   const isBrigade = data?.type === "brigade";

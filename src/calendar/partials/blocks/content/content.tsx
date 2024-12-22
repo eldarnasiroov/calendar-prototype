@@ -305,9 +305,9 @@ export const Content = ({ index, data, columnHeight }) => {
                                 <p>Масло</p>
                                 <p>{statuses[order.order_status]}</p>
                               </div>
-                              <div className="calendar-order_percent">
+                              {/* <div className="calendar-order_percent">
                                 {order.percent_of_work}%
-                              </div>
+                              </div> */}
                             </>
                           )}
                         </div>

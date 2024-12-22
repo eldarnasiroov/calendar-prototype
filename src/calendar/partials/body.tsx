@@ -7,18 +7,50 @@ import { getSelectedEntities } from "../common/redux/selectors";
 import { useSelector } from "react-redux";
 import "./blocks/content/content.scss";
 import { Timeline } from "./blocks/timeline/timeline";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export const Body: React.FC = () => {
   const selectedEntities: ITreeNode = useSelector(getSelectedEntities);
+  const [wrapperHeight, setWrapperHeight] = useState(0);
 
-  const [wrapperHeight, setWrapperHeight] = useState(0); // Состояние для высоты
+  const containerRef = useRef(null);
+  const [scrollLeft, setScrollLeft] = useState(false);
+
+  useEffect(() => {
+    const container = containerRef.current;
+
+    const handleScroll = () => {
+      if (container.scrollLeft > 50) {
+        setScrollLeft(true);
+      } else if (container.scrollLeft === 0) {
+        setScrollLeft(false);
+      }
+    };
+
+    if (container) {
+      container.addEventListener("scroll", handleScroll);
+    }
+
+    return () => {
+      if (container) {
+        container.removeEventListener("scroll", handleScroll);
+      }
+    };
+  }, []);
 
   return (
-    <div className="calendar-body">
-      <LeftColumn data={selectedEntities} />
+    <div
+      className="calendar-body"
+      style={{
+        position: "relative",
+        left: scrollLeft ? "-50px" : 0,
+        width: scrollLeft ? "calc(100% + 50px)" : "",
+        transition: "left 0.3s ease",
+      }}
+    >
+      <LeftColumn data={selectedEntities} halfWidth={scrollLeft} />
       <Timeline setWrapperHeight={setWrapperHeight} />
-      <div className="calendar-body__wrapper">
+      <div ref={containerRef} className="calendar-body__wrapper">
         {map(selectedEntities?.children, (item, index) => (
           <Content
             key={item}
