@@ -7,7 +7,10 @@ import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { borderColors, orderColors, statuses } from "../../../common/constants";
 import { useDispatch } from "react-redux";
-import { setSelectedEntities } from "../../../common/redux/calendarSlice";
+import {
+  setSelectedEntities,
+  setSelectedOrderId,
+} from "../../../common/redux/calendarSlice";
 import moment from "moment";
 
 export const Content = ({ index, data, columnHeight }) => {
@@ -138,7 +141,10 @@ export const Content = ({ index, data, columnHeight }) => {
       <div style={{}}>
         <div
           className="column-avatar_wrapper"
-          onClick={() => dispatch(setSelectedEntities(data))}
+          onClick={() => {
+            dispatch(setSelectedEntities(data));
+            dispatch(setSelectedOrderId(null));
+          }}
         >
           <div
             className="column-avatar"
@@ -204,6 +210,7 @@ export const Content = ({ index, data, columnHeight }) => {
           map(orders, (item: TOrder) => {
             return (
               <div
+                onClick={() => dispatch(setSelectedOrderId(item.id))}
                 className="calendar-order"
                 key={item.id}
                 style={{
@@ -241,9 +248,7 @@ export const Content = ({ index, data, columnHeight }) => {
               flexDirection: "column",
               alignItems: "center",
               position: "relative",
-              // overflowY: 'scroll',
               width: "100%",
-              // background: "red",
             }}
           >
             {map(groupedOrders, (item, index) => {
@@ -272,6 +277,7 @@ export const Content = ({ index, data, columnHeight }) => {
                         <div
                           className="calendar-order"
                           key={order.id}
+                          onClick={() => dispatch(setSelectedOrderId(order.id))}
                           style={{
                             background: orderColors[order.order_status],
                             overflow: "hidden",

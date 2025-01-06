@@ -5,14 +5,19 @@ const calendarSlice = createSlice({
   name: "calendar",
   initialState: {
     selectedEntities: null,
+    selectedOrderId: null,
   },
   reducers: {
     setSelectedEntities: (state, action: PayloadAction<ITreeNode>) => {
       state.selectedEntities = action.payload;
     },
+    setSelectedOrderId: (state, action: PayloadAction<number | null>) => {
+      state.selectedOrderId = action.payload;
+    },
   },
 });
 
-export const { setSelectedEntities } = calendarSlice.actions;
+export const { setSelectedEntities, setSelectedOrderId } =
+  calendarSlice.actions;
 
 export default calendarSlice.reducer;

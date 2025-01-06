@@ -48,7 +48,7 @@ export const Body: React.FC = () => {
         transition: "left 0.3s ease",
       }}
     >
-      <LeftColumn data={selectedEntities} halfWidth={scrollLeft} />
+      <LeftColumn data={selectedEntities}  />
       <Timeline setWrapperHeight={setWrapperHeight} />
       <div ref={containerRef} className="calendar-body__wrapper">
         {map(selectedEntities?.children, (item, index) => (

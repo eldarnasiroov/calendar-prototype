@@ -6,3 +6,8 @@ export const getSelectedEntities = createSelector(
   getCalendar,
   (calendar) => calendar.selectedEntities
 );
+
+export const getSelectedOrderId = createSelector(
+  getCalendar,
+  (calendar) => calendar.selectedOrderId
+);

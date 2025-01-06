@@ -4,16 +4,24 @@ import "./leftColumn.scss";
 import { find, sumBy, meanBy, map } from "lodash";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { getAllOrders, getCountOfWorkplaces } from "../../../common/helpers";
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { orderColors, statuses } from "../../../common/constants";
+import { useDispatch, useSelector } from "react-redux";
+import { getSelectedOrderId } from "../../../common/redux/selectors";
+import { setSelectedOrderId } from "../../../common/redux/calendarSlice";
 
 interface Props {
   data: ITreeNode;
-  halfWidth?: boolean;
 }
 
-export const LeftColumn: React.FC<Props> = ({ data, halfWidth = false }) => {
+export const LeftColumn: React.FC<Props> = ({ data }) => {
   if (!data) return null;
+
+  const selectedOrderId = useSelector(getSelectedOrderId);
+  const dispatch = useDispatch();
+  
+  const isOrderSelected = !!selectedOrderId;
+  const [selectedOrder, setSelectedOrder] = useState<TOrder | null>(null);
 
   const isBrigade = data?.type === "brigade";
   const brigadier = find(
@@ -22,6 +30,7 @@ export const LeftColumn: React.FC<Props> = ({ data, halfWidth = false }) => {
   );
 
   const orders = useMemo(() => getAllOrders(data), [data]);
+
   const commonInformation = useMemo(() => {
     return {
       quantity: orders?.length,
@@ -32,14 +41,23 @@ export const LeftColumn: React.FC<Props> = ({ data, halfWidth = false }) => {
     };
   }, [orders]);
 
+  useEffect(() => {
+    if (!selectedOrderId) return;
+
+    const order = find(orders, (item: TOrder) => item.id === selectedOrderId);
+    setSelectedOrder(order);
+  }, [selectedOrderId]);
+
   return (
     <div className="calendar-left-column">
       <div>
         <div className="column-avatar_wrapper">
           <div
             className="column-avatar"
+            onClick={() => dispatch(setSelectedOrderId(null))}
             style={{
               borderColor: "black",
+              cursor: "pointer",
             }}
           >
             <img
@@ -88,27 +106,50 @@ export const LeftColumn: React.FC<Props> = ({ data, halfWidth = false }) => {
           </div>
         )}
 
-        {map(orders, (item: TOrder) => (
+        {!isOrderSelected &&
+          map(orders, (item: TOrder) => (
+            <div
+              className="calendar-order"
+              key={item.id}
+              style={{
+                background: orderColors[item.order_status],
+              }}
+            >
+              <div className="calendar-order_id">{item.id}</div>
+              <div className="calendar-order_info">
+                <p>Владислав М.</p>
+                <p>Мазда</p>
+                <p>Замена масла</p>
+                <p>Масло</p>
+                <p>{statuses[item.order_status]}</p>
+              </div>
+              <div className="calendar-order_percent">
+                {item.percent_of_work}%
+              </div>
+            </div>
+          ))}
+
+        {isOrderSelected && !!selectedOrder && (
           <div
             className="calendar-order"
-            key={item.id}
+            key={selectedOrder.id}
             style={{
-              background: orderColors[item.order_status],
+              background: orderColors[selectedOrder.order_status],
             }}
           >
-            <div className="calendar-order_id">{item.id}</div>
+            <div className="calendar-order_id">{selectedOrder.id}</div>
             <div className="calendar-order_info">
               <p>Владислав М.</p>
               <p>Мазда</p>
               <p>Замена масла</p>
               <p>Масло</p>
-              <p>{statuses[item.order_status]}</p>
+              <p>{statuses[selectedOrder.order_status]}</p>
             </div>
             <div className="calendar-order_percent">
-              {item.percent_of_work}%
+              {selectedOrder.percent_of_work}%
             </div>
           </div>
-        ))}
+        )}
       </div>
     </div>
   );
