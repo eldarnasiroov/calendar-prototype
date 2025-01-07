@@ -46,3 +46,59 @@ export function findObjectWithMatchingParentId(data, parentId) {
     ) || null
   );
 }
+
+export const findWorkplaces = (data) => {
+  const search = (nodes) => {
+    return flatMap(nodes, (node) => {
+      const workplaces = node.type === "workplace" ? [node] : [];
+      if (node.children) {
+        return workplaces.concat(search(node.children));
+      }
+      return workplaces;
+    });
+  };
+
+  return search(data);
+};
+
+export const filterWorkplacesByOrderId = (data, orderId) => {
+  return data.filter((item) =>
+    item.worker?.orders?.some((order) => order.id === orderId)
+  );
+};
+
+export const filterOrdersInWorkplacesById = (data, targetId) => {
+  return data.map((item) => {
+    const filteredOrders = item.worker.orders.filter(
+      (order) => order.id === targetId
+    );
+
+    return {
+      ...item,
+      worker: {
+        ...item.worker,
+        orders: filteredOrders,
+      },
+    };
+  });
+};
+
+export const findElementByTypeAndId = (data, targetType, targetId) => {
+  for (const item of data) {
+    if (item.type === targetType && item.id === targetId) {
+      return item;
+    }
+
+    if (item.children && item.children.length > 0) {
+      const result = findElementByTypeAndId(
+        item.children,
+        targetType,
+        targetId
+      );
+      if (result) {
+        return result;
+      }
+    }
+  }
+  return null;
+};

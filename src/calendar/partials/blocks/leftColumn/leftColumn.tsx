@@ -3,12 +3,24 @@ import { ITreeNode, TOrder } from "../../../components/tree/common/types";
 import "./leftColumn.scss";
 import { find, sumBy, meanBy, map } from "lodash";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
-import { getAllOrders, getCountOfWorkplaces } from "../../../common/helpers";
+import {
+  findElementByTypeAndId,
+  getAllOrders,
+  getCountOfWorkplaces,
+} from "../../../common/helpers";
 import { useEffect, useMemo, useState } from "react";
-import { orderColors, statuses } from "../../../common/constants";
+import {
+  FAKE_CURRENT_USER_ID,
+  orderColors,
+  statuses,
+} from "../../../common/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { getSelectedOrderId } from "../../../common/redux/selectors";
-import { setSelectedOrderId } from "../../../common/redux/calendarSlice";
+import {
+  setSelectedEntities,
+  setSelectedOrderId,
+} from "../../../common/redux/calendarSlice";
+import { mockData } from "../../../common/data";
 
 interface Props {
   data: ITreeNode;
@@ -19,7 +31,7 @@ export const LeftColumn: React.FC<Props> = ({ data }) => {
 
   const selectedOrderId = useSelector(getSelectedOrderId);
   const dispatch = useDispatch();
-  
+
   const isOrderSelected = !!selectedOrderId;
   const [selectedOrder, setSelectedOrder] = useState<TOrder | null>(null);
 
@@ -54,14 +66,34 @@ export const LeftColumn: React.FC<Props> = ({ data }) => {
         <div className="column-avatar_wrapper">
           <div
             className="column-avatar"
-            onClick={() => dispatch(setSelectedOrderId(null))}
+            onClick={() => {
+              if (data.id === FAKE_CURRENT_USER_ID) {
+                dispatch(setSelectedOrderId(null));
+                return;
+              }
+
+              const result = findElementByTypeAndId(
+                mockData,
+                data.type,
+                data.id
+              );
+
+              dispatch(setSelectedOrderId(null));
+              dispatch(setSelectedEntities(result));
+            }}
             style={{
               borderColor: "black",
               cursor: "pointer",
             }}
           >
             <img
-              src={isBrigade ? brigadier?.worker?.image : data?.worker?.image}
+              src={
+                isBrigade
+                  ? brigadier?.worker?.image
+                    ? brigadier?.worker?.image
+                    : "no_image_worker.svg"
+                  : data?.worker?.image
+              }
               alt=""
               className="column-avatar_image"
             />

@@ -33,7 +33,7 @@ export const Header: React.FC = () => {
     ) {
       return;
     }
-    console.log("zawel");
+    
     const parentEntity = findObjectWithMatchingParentId(
       // !To Do
       mockData[0],

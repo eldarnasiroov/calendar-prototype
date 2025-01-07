@@ -1,20 +1,28 @@
 import { ITreeNode, TOrder } from "../../../components/tree/common/types";
-import { find, sumBy, meanBy, map, minBy } from "lodash";
+import { find, sumBy, meanBy, map, minBy, flatMap } from "lodash";
 import "./content.scss";
-import { getAllOrders } from "../../../common/helpers";
+import {
+  filterOrdersInWorkplacesById,
+  filterWorkplacesByOrderId,
+  findWorkplaces,
+  getAllOrders,
+} from "../../../common/helpers";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { borderColors, orderColors, statuses } from "../../../common/constants";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   setSelectedEntities,
   setSelectedOrderId,
 } from "../../../common/redux/calendarSlice";
 import moment from "moment";
+import { mockData } from "../../../common/data";
+import { getSelectedEntities } from "../../../common/redux/selectors";
 
 export const Content = ({ index, data, columnHeight }) => {
   const dispatch = useDispatch();
+  const selectedEntities: ITreeNode = useSelector(getSelectedEntities);
 
   const isBrigade = data?.type === "brigade";
   const brigadier = find(
@@ -94,6 +102,33 @@ export const Content = ({ index, data, columnHeight }) => {
     }));
   }
 
+  const commonInformation = useMemo(() => {
+    return {
+      quantity: orders?.length,
+      totalSum: sumBy(orders, "total_sum")?.toLocaleString("ru-RU"),
+      averagePercentOfWork: parseFloat(
+        meanBy(orders, "percent_of_work").toFixed(2)
+      ),
+    };
+  }, [orders]);
+
+  const handleSelectOrder = (order: TOrder) => {
+    const workplaces = findWorkplaces(mockData);
+    const filteredData = filterWorkplacesByOrderId(workplaces, order.id);
+    const workplacesWithFilteredOrders = filterOrdersInWorkplacesById(
+      filteredData,
+      order.id
+    );
+    
+    dispatch(setSelectedOrderId(order.id));
+    dispatch(
+      setSelectedEntities({
+        ...selectedEntities,
+        children: workplacesWithFilteredOrders,
+      })
+    );
+  };
+
   const IMAGE_MAX_HEIGHT = 68;
   const imageRef = useRef(null);
   const [imageHeight, setImageHeight] = useState(0);
@@ -118,16 +153,6 @@ export const Content = ({ index, data, columnHeight }) => {
   useEffect(() => {
     setMarginBottom(IMAGE_MAX_HEIGHT - imageHeight);
   }, [imageHeight]);
-
-  const commonInformation = useMemo(() => {
-    return {
-      quantity: orders?.length,
-      totalSum: sumBy(orders, "total_sum")?.toLocaleString("ru-RU"),
-      averagePercentOfWork: parseFloat(
-        meanBy(orders, "percent_of_work").toFixed(2)
-      ),
-    };
-  }, [orders]);
 
   return (
     <div
@@ -210,7 +235,7 @@ export const Content = ({ index, data, columnHeight }) => {
           map(orders, (item: TOrder) => {
             return (
               <div
-                onClick={() => dispatch(setSelectedOrderId(item.id))}
+                onClick={() => handleSelectOrder(item)}
                 className="calendar-order"
                 key={item.id}
                 style={{
@@ -277,7 +302,7 @@ export const Content = ({ index, data, columnHeight }) => {
                         <div
                           className="calendar-order"
                           key={order.id}
-                          onClick={() => dispatch(setSelectedOrderId(order.id))}
+                          onClick={() => handleSelectOrder(order)}
                           style={{
                             background: orderColors[order.order_status],
                             overflow: "hidden",
