@@ -1,13 +1,15 @@
 .calendar-left-column {
   min-width: 100px;
   max-width: 100px;
-  min-height: 100vh;
+  // height: 100dvh;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-top: 10px;
   border-right: 6px solid black;
   border-radius: 50px 50px 0 50px;
+  overflow: scroll;
 
   .column-avatar_wrapper {
     width: 100%;

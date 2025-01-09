@@ -21,30 +21,40 @@ export const Timeline = ({ setWrapperHeight }) => {
 
   useEffect(() => {
     if (wrapperRef.current) {
-      setWrapperHeight(wrapperRef.current.offsetHeight + 125);
+      setWrapperHeight(wrapperRef.current.scrollHeight + 125);
     }
   }, []);
 
   return (
     <div
       ref={wrapperRef}
-      className="calendar-timeline"
       style={{
-        // Вынести в константу
-        marginTop: "125px",
+        position: "sticky",
+        left: "0",
+        zIndex: 2,
       }}
     >
-      <div className="calendar-timeline__wrapper">
-        {map(getDaysOfMonth(2024, JANUARY), (item) => {
-          return (
-            <div key={item} className="calendar-timeline__item">
-              <div className="calendar-timeline__date">
-                <div className="calendar-timeline__day">{item}</div>
+      <div
+        className="calendar-timeline"
+        style={{
+          // Вынести в константу
+          marginTop: "125px",
+          position: "sticky",
+          left: "0",
+        }}
+      >
+        <div className="calendar-timeline__wrapper">
+          {map(getDaysOfMonth(2024, JANUARY), (item) => {
+            return (
+              <div key={item} className="calendar-timeline__item">
+                <div className="calendar-timeline__date">
+                  <div className="calendar-timeline__day">{item}</div>
+                </div>
+                <div className="calendar-timeline__line"></div>
               </div>
-              <div className="calendar-timeline__line"></div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
     </div>
   );

@@ -119,7 +119,7 @@ export const Content = ({ index, data, columnHeight }) => {
       filteredData,
       order.id
     );
-    
+
     dispatch(setSelectedOrderId(order.id));
     dispatch(
       setSelectedEntities({
@@ -165,6 +165,7 @@ export const Content = ({ index, data, columnHeight }) => {
     >
       <div style={{}}>
         <div
+          id="column-avatar_wrapper"
           className="column-avatar_wrapper"
           onClick={() => {
             dispatch(setSelectedEntities(data));
